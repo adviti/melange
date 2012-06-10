@@ -1,0 +1,61 @@
+diff -r 5bb001345813 app/gdata/docs/service.py
+--- a/app/gdata/docs/service.py Sun Jul 17 21:10:30 2011 +0530
++++ b/app/gdata/docs/service.py Sun Jul 17 21:07:59 2011 +0300
+@@ -106,6 +106,11 @@
+         server=server, additional_headers=additional_headers, **kwargs)
+     self.ssl = True
+ 
++    # Variables used to hack-in Export function to use it
++    # with a file handler instead of file path name.
++    self.file_handler = None
++    self.use_file_handler = False
++
+   def _MakeKindCategory(self, label):
+     if label is None:
+       return None
+@@ -183,10 +188,17 @@
+       raise gdata.service.RequestError, {'status': server_response.status,
+                                          'reason': server_response.reason,
+                                          'body': response_body}
+-    f = open(file_path, 'wb')
+-    f.write(response_body)
+-    f.flush()
+-    f.close()
++
++    def writeResponseToFile(f, close=True):
++      f.write(response_body)
++      f.flush()
++      if close:
++        f.close()
++
++    if self.use_file_handler:
++        writeResponseToFile(self.file_handler, close=False)
++    else:
++        writeResponseToFile(open(file_path, 'wb'))
+ 
+   def MoveIntoFolder(self, source_entry, folder_entry):
+     """Moves a document into a folder in the Document List Feed.
+@@ -346,7 +358,7 @@
+ 
+     self._DownloadFile(url, file_path)
+ 
+-  def Export(self, entry_or_id_or_url, file_path, gid=None, extra_params=None):
++  def Export(self, entry_or_id_or_url, file_path, gid=None, extra_params=None, file_handler=None):
+     """Downloads a document from the Document List in a different format.
+ 
+     Args:
+@@ -361,6 +373,13 @@
+     Raises:
+       RequestError if the service does not respond with success
+     """
++
++    if file_handler:
++      self.file_handler = file_handler
++      self.use_file_handler = True
++    else:
++      self.use_file_handler = False
++
+     ext = None
+     match = self.__FILE_EXT_PATTERN.match(file_path)
+     if match:
+

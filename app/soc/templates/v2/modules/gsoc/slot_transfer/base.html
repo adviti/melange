@@ -1,0 +1,56 @@
+{% extends "v2/modules/gsoc/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+
+{% block page_content %}
+{% if status == "rejected" %}
+  <div id="user-message" class="error">
+    <strong>ALERT: </strong>Program administrator has rejected your slot
+    transfer request.
+  </div>
+{% endif %}
+
+<div id="slot-transfer-show" class="block full home-block-1">
+  <h2 id="title-section-slot-transfer-show">
+    Slot transfer requests
+  </h2>
+
+  <div id="edit-page" class="org-page-link">
+    {% if new_slot_transfer_page_link %}
+      <a href="{{ new_slot_transfer_page_link }}">
+        Initiate a new slot transfer request
+      </a>
+    {% else %}{% if edit_slot_transfer_page_link %}
+      <a href="{{ edit_slot_transfer_page_link }}">
+        Update pending slot transfer request
+      </a>
+    {% endif %}{% endif %}
+  </div>
+</div>
+
+
+{% for req in requests %}
+  {{ req.render }}
+{% endfor %}
+
+
+{% endblock page_content %}
+
+
+{% block dependencies %}
+  [
+    css("/soc/content/{{ app_version }}/css/v2/gsoc/readonly.css")
+  ]
+{% endblock dependencies %}

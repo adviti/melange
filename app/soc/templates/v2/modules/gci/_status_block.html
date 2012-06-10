@@ -1,0 +1,37 @@
+{% if task %}
+  <div class="block block-status level-easy">
+    <div class="cog"></div>
+    <div class="block-title">My Current Task</div>
+    <div class="block-status-top">
+    <span class="block-status-status"><span class="emph">Status:</span> {{ task.status }}</span>
+    {% if time_left %}<span class="block-status-time"><span class="emph">Time Left:</span>{{ time_left }}</span>{% endif %}
+  </div>
+  <div class="block-content">
+    <div class="block-status-task">
+      <span class="block-status-task-link"><a href="{{ task_url }}">{{ task.title }}</a></span>
+      <span class="block-status-task-project">{{ task.org.name }}</span>
+    </div>
+  </div>
+  <div class="block-status-action clearfix">
+    <a href="{{ task_url }}" class="block-status-action-view"><span>View Task</span></a>
+    <a href="{{ dashboard_link }}" class="block-status-action-dashboard"><span>My Dashboard</span></a>
+  </div>
+    <div class="block-status-user">
+      You are logged in as: <a href="{{ profile_link }}">{{ user_email }} </a>
+      <a href="{{ logout_link }}">(change)</a>
+      {% if link_id %}<p>Your username is: {{ link_id }}</p>{% endif %}
+    </div>
+  </div>
+  <!-- end .block.block-status -->
+{% else %}
+  <div class="block block-status block-status-sm"> 
+    <div class="block-status-user"> 
+      You are logged in as: <a href="{{ profile_link }}">{{ user_email }}</a> (<a href="{{ logout_link }}">change</a>)
+      {% if link_id %}<p>Your username is: {{ link_id }}</p>{% endif %}
+    </div> 
+    <div class="block-status-action block-status-action-single clearfix"> 
+      <a href="{{ dashboard_link }}" class="block-status-action-dashboard"><span>My Dashboard</span></a>
+    </div> 
+  </div> 
+  <!-- end .block.block-status.block-status-sm --> 
+{% endif %}

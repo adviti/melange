@@ -1,0 +1,77 @@
+<div class="block-task-uploaded-code">
+  <span class="block-task-uploaded-code-title">Uploaded Work</span>
+  <div class="block-task-uploaded-code-content">
+    {% if not submissions %}
+      <span class="block-task-uploaded-code-status">No work has been uploaded yet.</span>
+    {% else %}
+      {% if send_for_review %}
+        <span class="block-task-uploaded-code-note">If you have finished the task, click <strong>Mark Task as Complete</strong> to submit your work for review.</span>
+      {% endif %}
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" class="block-task-uploaded-code-listing">
+        <tr>
+          <th>File name/URL</th>
+          <th>File size</th>
+          <th>Date submitted</th>
+          <th></th>
+        </tr>
+        {% for submission in submissions %}
+          <tr>
+            {% if submission.upload_of_work %}
+              {% if submission.is_blob_valid %}
+              <td><a href="{{ download_url }}?id={{ submission.entity.key.id }}">{{ submission.upload_of_work.filename }}</a></td>
+              <td>{{ submission.upload_of_work.size|filesizeformat }}</td>
+              {% else %}
+                <td> Download Broken </td>
+                <td></td>
+              {% endif %}
+            {% else %}
+              <td>{{ submission.entity.url_to_work|urlizetrunc:45 }}</td>
+              <td>n/a</td>
+            {% endif %}
+            <td>{{ submission.entity.submitted_on|date:"F d Y H:i" }} UTC</td>
+            {% if submission in deleteable %}
+              <td>
+                <form action="?delete_submission" method="post">
+                  <input value="Delete" name="{{submission.entity.key.id}}" class="task-btn task-btn-delete" type="submit">
+                </form>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </table>
+
+      {% if send_for_review %}
+        <div class="block-task-uploaded-code-btns">
+          <form action="?send_for_review" method="post" class="form-send-for-review clearfix">
+            <div class="form-row form-row-buttons">
+              <input value="Mark task as complete" class="btn btn-task-mark-complete" type="submit">
+            </div>
+          </form>
+        </div>
+      {% endif %}
+
+    {% endif %}
+
+    {% if work_file_form %}
+      <span class="block-task-uploaded-code-note">Upload your final work file or paste in its URL, then click Submit.</span>
+      <form method="post" enctype="multipart/form-data" id="file-form" class="form-upload-code clearfix">
+        {{ work_file_form.render }}
+        <div class="form-row form-row-buttons">
+          <input value="Submit File" name="work_file_submit" class="button" type="submit">
+        </div>
+      </form>
+    {% endif %}
+
+    {% if work_url_form %}
+      <form action="{{ direct_post_url }}" method="post" class="form-upload-url clearfix">
+        {{ work_url_form.non_field_errors }}
+        {{ work_url_form.render }}
+        <div class="form-row form-row-buttons">
+          <input value="Submit URL" name="work_url_submit" class="button" type="submit">
+        </div>
+      </form>
+    {% endif %}
+
+  </div>
+</div>
+<!-- end .block-task-uploaded-code -->

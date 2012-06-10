@@ -1,0 +1,47 @@
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{{ error.render }}
+
+<div class="block-form-title">
+  <span class="title">{{ title }}</span>
+  <span class="req">* fields required</span>
+</div>
+<form action="#" method="post" class="form-create-task clearfix">
+  <div class="form-row grid_4 omega {{ form.bound_fields.tags.div_class }}">
+    {{ form.bound_fields.tags.render }}
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="form-row form-row-task-assigned-mentor
+      {% if form.bound_fields.mentors.errors %}
+        error
+      {% endif %}">
+    <label for="long-description" class="form-label">Assigned Mentor<em>*</em></label>
+    {% if form.bound_fields.mentors.errors %}
+      <span class="form-row-error-msg">
+        <br />{{ form.bound_fields.mentors.errors.0 }}
+      </span>
+    {% endif %}
+    <div class="form-row-task-assigned-mentor-inner">
+      {{ form.bound_fields.mentors.render }}
+    </div>
+    <span class="note">Mentor who will oversee task's completion</span>
+  </div>
+
+  <div class="form-row form-row-buttons">
+    <input value="Submit" class="button" type="submit">
+  </div>
+</form>

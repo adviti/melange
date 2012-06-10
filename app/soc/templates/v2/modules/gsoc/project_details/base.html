@@ -1,0 +1,141 @@
+{% extends "v2/modules/gsoc/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/buttons.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/forms.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/uniform.default.css" />
+{% endblock stylesheets %}
+
+
+{% block usermenu %}
+  {{ user_actions.render }}
+{% endblock usermenu %}
+
+{% block page_content %}
+<div id="organization-name" class="block full home-block-1">
+  <h2 id="title-section-project">
+    {{ project.title }}
+  </h2>
+  <h3 id="title-section-project">
+    {{ project.parent.name }}
+  </h3>
+
+  <div id="edit-page" class="org-page-link">
+    {% if update_link %}
+      <a href="{{ update_link }}">Update</a>
+    {% endif %}
+  </div>
+</div>
+
+{% if project.feed_url %}
+  <div id="project-details" class="content_column_1">
+{% endif %}
+  <!-- begin block -->
+  <div id="project-abstract" class="block block-project-abstract">
+    <h4 title="title-section-project-abstract">Abstract</h4>
+    <div id="block-project-abstract-content" class="block-content">
+      <p>{{ project.abstract|safe }}</p>
+    </div>
+    <div id="block-project-abstract-readmore" class="org-home-readmore">
+      <a href="{{ org_home_link }}">Organization Homepage &raquo;</a>
+    </div>
+  </div>
+  <!-- end block -->
+
+  <!-- begin block -->
+  {% if project.public_info %}
+    <div id="project-public-info" class="block block-project-public-info">
+      <h4 title="title-section-project-public-info">Additional Information</h4>
+      <div id="block-project-public-info-content" class="block-content">
+        <p>{{ project.public_info|safe }}</p>
+      </div>
+      <div id="block-project-abstract-readmore" class="org-home-readmore">
+        {% if project.additional_info %}
+          <a href="{{ project.additional_info }}">Additional Information &raquo;</a>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+  <!-- end block -->
+{% if project.feed_url %}
+</div>
+<div class="content_column_2">
+  <!-- begin block -->
+  <div id="blog-feed" class="block block-blog-feed"></div>
+  <!-- end block -->
+</div>
+{% endif %}
+
+{% endblock page_content %}
+
+{% block dependencies %}
+  [
+    dep.uniform,
+    dep.melange.action,
+    function () {
+      /* Apply Uniform CSS to form fields. */
+      jQuery("select").uniform();
+
+      /* Change all the tooltips to be displayed onhover over a
+      * question mark. Calling this function only once will take
+      * care of all such instances.
+      */
+      melange.action.createCluetip();
+
+      /* Create the project featured button and make it post using ajax. */
+      {% for button in user_actions.toggle_buttons %}
+        melange.action.toggleButton(
+            "{{ button.id }}", "{{ button.type }}", "{{ button.post_url }}",
+            "{{ button.state }}",
+            {checked: "{{ button.labels.checked }}",
+             unchecked: "{{ button.labels.unchecked }}"});
+      {% endfor %}
+
+      /* Add new mentors upon the click of "Add new" link below assign mentors*/
+      var last_id = 1;
+      new_link = function () {
+        var new_mentor = jQuery("select#id-assign-mentor").clone(true);
+        new_mentor = new_mentor.attr(
+            'id', new_mentor.attr('id') + '-new-' + last_id);
+        new_mentor.appendTo("div#user-menu-select-mentors");
+        new_mentor.children('option').each(function () {
+          jQuery(this).removeAttr('selected');
+          jQuery(this).removeAttr('disabled');
+        });
+        new_mentor.uniform();
+        last_id++;
+      }
+    },
+    {% if project.feed_url %}
+      dep.melange.blog,
+      null,
+      function () {
+        function initialize() {
+          var blog = new BlogPreview(document.getElementById("blog-feed"));
+          blog.show("{{ project.feed_url|safe }}", 5, "Blog Feed");
+        }
+
+        jQuery(
+          function () {
+            google.load("feeds","1", {callback:initialize});
+          }
+        );
+      }
+    {% endif %}
+  ]
+{% endblock dependencies %}

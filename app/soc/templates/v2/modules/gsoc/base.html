@@ -1,0 +1,81 @@
+{% extends "v2/soc/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/reset.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/960.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/global.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/typography.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/structure.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/menu.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/user-messages.css" />
+{% endblock stylesheets %}
+
+{% block body %}
+  {% block extra_header %}
+  {% endblock extra_header %}
+
+  <!-- TODO: Header should get logo, link and program name from context
+  extra (google) logo will be removed after update.-->
+  <div id="bg">
+  {% block header %}
+    {{ header.render }}
+  {% endblock header %}
+
+  {% block main_content %}
+    <div id="main">
+      <div class="container_12">
+        <div id="menu-container" class="grid_3">
+          {{ mainmenu.render }}
+
+          {% block usermenu %}
+            {% comment %}
+              Empty here. Can be utilized in derived templates
+            {% endcomment %}
+          {% endblock usermenu %}
+        </div>
+        <!-- #menu-container.grid_3 -->
+
+        <div class="grid_9">
+          <div class="content">
+               {% if ds_write_disabled %}
+                <div id="user-message" class="error">
+                  <strong>ALERT: </strong>Google Appengine datastore write
+                  capability has been disabled at the moment. You will
+                  <strong>NOT</strong> be able to save your changes at this
+                  time. We are sorry for the inconvenience caused. Please visit
+                  <a href="http://code.google.com/status/appengine">
+                  http://code.google.com/status/appengine</a> to check
+                  Appengine datastore status.
+                </div>
+              {% endif %}
+            {% block page_content %}
+              {{ tmpl.render }}
+            {% endblock page_content %}
+          </div>
+          <!-- .content -->
+        </div>
+        <!-- .grid_9 -->
+      </div>
+    <!-- .container_12 -->
+    </div>
+    <!-- .main -->
+  {% endblock main_content %}
+
+    {% block footer %}
+      {{ footer.render }}
+    {% endblock footer %}
+  </div>
+  <!-- #bg -->
+{% endblock body %}

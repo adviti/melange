@@ -1,0 +1,57 @@
+/*////////////////////////////////
+
+    User messages (Dashboard)
+
+////////////////////////////////*/
+#user-message {
+  display: block;
+  font-size: 12px;
+  margin: 0 0 15px 0;
+  padding: 10px;
+  text-align: center;
+}
+#user-message.error {
+  background: #f7eae1;
+  border: 1px solid #f86800;
+  box-shadow: inset 0 0 10px #f8d6c0;
+  -moz-box-shadow: inset 0 0 10px #f8d6c0;
+  -webkit-box-shadow: inset 0 0 10px #f8d6c0;
+}
+#user-message.error table.proposal-duplicates {
+  background: #fff;
+  border: 1px solid #f58236;
+  margin-top: 10px;
+}
+#user-message.error table.proposal-duplicates th {
+  background: #f58236;
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.2em;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}
+#user-message.error table.proposal-duplicates td {
+  background: #faf4f1;
+  padding: 2px 4px;
+  border: 1px solid #efcab2;
+}
+#user-message.error table.proposal-duplicates td a {
+  color: #188dd0;
+  font-weight: bold;
+  text-decoration: none;
+}
+#user-message.error table.proposal-duplicates td a:hover {
+  text-decoration: underline;
+}
+#main .grid_9 p#user-logged-in {
+  color: #989898;
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+p#user-logged-in a {
+  font-style: normal;
+  font-weight: normal;
+}

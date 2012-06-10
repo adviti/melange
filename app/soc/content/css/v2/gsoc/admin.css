@@ -1,0 +1,176 @@
+/*////////////////
+
+  Admin Dashboard
+
+////////////////*/
+.dashboard {
+  min-height: 500px;
+}
+/* disabled dashboard */
+.dashboard.disabled {
+  display: none;
+}
+/* dashboard head or title */
+.dashboard-head {
+  border-top: 1px solid #238BD2;
+  font-weight:bold;
+  line-height:1.2em;
+  margin-bottom:0;
+  font-size:1em;
+  line-height:1.455;
+  color: #238BD2;
+  margin-top:1.2em;
+}
+.dashboard-head span {
+  background-color: #F6F6F6;
+  color: #238BD2;
+  left: 0;
+  padding-right: 0.4em;
+  position: relative;
+  top: -0.8em;
+}
+/* admin dashboard container */
+.block-dashboard {
+  width: 100%;
+  display: inline-block;
+  box-shadow: 0 4px 18px #C8C8C8;
+}
+/* column for admin dashboard that take half block-dashboard */
+.block-dashboard .column {
+  float: right;
+  width: 50%;
+}
+/* first column */
+.block-dashboard .column.first {
+  float: left;
+  width: 50%;
+}
+/* entry inside column that hold iconic information */
+.block-dashboard .column .column-entry {
+  margin: 1.3em 0;
+  padding: 2px 4px 2px 34px;
+  background-repeat: no-repeat;
+  background-position: 4px 4px;
+}
+.block-dashboard .column .column-entry:hover {
+  background-color: #E0F1FC;
+}
+.block-dashboard .column .column-entry h4,
+.block-dashboard .column .column-entry p,
+.block-dashboard .column .column-entry div
+{
+  padding-left: 10px;
+}
+/* title for column-entry */
+#main .column-entry h4 {
+  background: transparent;
+  text-transform: none;
+  padding: 0 0 0 10px;
+  line-height: normal;
+  font-size: 110%;
+  font-weight: bold;
+}
+/* description of column-entry */
+#main .column-entry p {
+  margin-bottom: 0;
+}
+/* container for column-entry's sublinks */
+#main .column-entry div {
+  font-size: 10px;
+  color: #999;
+}
+.column-entry.trackings,
+.column-entry.shipment_infos
+{
+  background-image: url(../../../images/v2/gsoc/admin/trackings.png);
+}
+.column-entry.create_shipment_info,
+{
+  background-image: url(../../../images/v2/gsoc/admin/proposals.png);
+}
+.column-entry.edit_payment_infos,
+{
+  background-image: url(../../../images/v2/gsoc/admin/edit.png);
+}
+.column-entry.sync_data {
+  background-image: url(../../../images/v2/gsoc/admin/sync_data.png);
+}
+.column-entry.lookup_profile {
+  background-image: url(../../../images/v2/gsoc/admin/lookup.png);
+}
+.column-entry.allocate_slots,
+.column-entry.slots_allocation
+{
+  background-image: url(../../../images/v2/gsoc/admin/allocate.png);
+}
+.column-entry.slots_transfer {
+  background-image: url(../../../images/v2/gsoc/admin/transfer.png);
+}
+.column-entry.duplicates {
+  background-image: url(../../../images/v2/gsoc/admin/duplicates.png);
+}
+.column-entry.manage_proposals {
+  background-image: url(../../../images/v2/gsoc/admin/proposals.png);
+}
+.column-entry.accept_proposals,
+.column-entry.manage_projects
+{
+  background-image: url(../../../images/v2/gsoc/admin/accept_proposals.png);
+}
+.column-entry.withdraw_projects {
+  background-image: url(../../../images/v2/gsoc/admin/withdraw.png);
+}
+.column-entry.reminder_emails {
+  background-image: url(../../../images/v2/gsoc/admin/mail.png);
+}
+.column-entry.program_settings,
+.column-entry.edit_program
+{
+  background-image: url(../../../images/v2/gsoc/admin/settings.png);
+}
+.column-entry.edit_timeline {
+  background-image: url(../../../images/v2/gsoc/admin/date.png);
+}
+.column-entry.manage_organizations {
+  background-image: url(../../../images/v2/gsoc/admin/users.png);
+}
+.column-entry.participant_locations {
+  background-image: url(../../../images/v2/gsoc/admin/marker.png);
+}
+.column-entry.report_statistic {
+  background-image: url(../../../images/v2/gsoc/admin/report.png);
+}
+.column-entry.documents,
+.column-entry.evaluations,
+.column-entry.mentor_evaluations,
+.column-entry.student_evaluations
+{
+  background-image: url(../../../images/v2/gsoc/admin/evaluations.png);
+}
+.column-entry.evaluation_group
+{
+  background-image: url(../../../images/v2/gsoc/admin/grade.png);
+}
+.column-entry.create_mentor_evaluation,
+.column-entry.create_student_evaluation,
+.column-entry.create_evaluation_group
+{
+  background-image: url(../../../images/v2/gsoc/admin/create.png);
+}
+.column-entry.edit_mentor_evaluation,
+.column-entry.edit_student_evaluation,
+.column-entry.edit_evaluation_group
+{
+  background-image: url(../../../images/v2/gsoc/admin/edit.png);
+}
+.column-entry.preview_mentor_evaluation,
+.column-entry.preview_student_evaluation
+{
+  background-image: url(../../../images/v2/gsoc/admin/preview.png);
+}
+.column-entry.view_mentor_evaluation,
+.column-entry.view_student_evaluation,
+.column-entry.view_evaluation_group
+{
+  background-image: url(../../../images/v2/gsoc/admin/view.png);
+}

@@ -1,0 +1,56 @@
+{% extends base_layout %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block page_content %}
+<ul>
+{% if duplicates %}
+  {% for duplicate in duplicates %}
+    {{ duplicate.render }}
+  {% endfor %}
+{% else %}
+<strong>There are no existing duplicate proposals at the time of
+last calculation</strong><br/>
+{% endif %} 
+</ul>
+
+<span id="duplicates_calc_status">
+  Duplicates calculation status:
+  <strong>
+  {{ duplicates_status.status|capfirst }}
+  </strong>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<span id="duplicates_calc_time">
+  Last calculated at: 
+  <strong>
+  {% if duplicates_status.calculated_on %}
+  {{ duplicates_status.calculated_on|date:"jS F Y H:i" }}
+  {% else %}
+  Not Calculated
+  {% endif %}
+  </strong>
+</span>
+{% ifnotequal duplicates_status.status "processing" %}
+  <form method="post">
+  <input type="submit" id="id_button_duplicate_slots" class="button"
+  {% if not duplicates_status.calculated_on %}
+    value="Initialize Calculation" name="calculate"
+  {% else %}
+    value="Recalculate" name="recalculate"
+  {% endif %}
+  />
+  </form>
+{% endifnotequal %}
+{% endblock %}

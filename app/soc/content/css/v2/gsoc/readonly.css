@@ -1,0 +1,81 @@
+/*////////////////
+
+  LessCSS
+
+////////////////*/
+/*///////////////////////////
+
+    Model read-only pages
+
+//////////////////////////*/
+.model-readonly {
+  /*all model read-only page styling elements*/
+
+}
+.model-readonly .row-odd {
+  /*styling for odd rows*/
+
+  /*styling for each property in the model*/
+
+  background: #f6f6f6;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+.model-readonly .row-odd label {
+  /*verbose name of each model property*/
+
+  clear: left;
+  float: left;
+  font-weight: bold;
+  color: #238bd2;
+  margin-right: 10px;
+  padding-right: 20px;
+  text-align: right;
+  width: 200px;
+}
+.model-readonly .row-odd span.readonly-row-content {
+  /*actual value stored in the property*/
+
+  float: right;
+  padding: 0;
+  width: 390px;
+}
+.model-readonly .row-even {
+  /*styling for odd rows*/
+
+  /*styling for each property in the model*/
+
+  background: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+.model-readonly .row-even label {
+  /*verbose name of each model property*/
+
+  clear: left;
+  float: left;
+  font-weight: bold;
+  color: #238bd2;
+  margin-right: 10px;
+  padding-right: 20px;
+  text-align: right;
+  width: 200px;
+}
+.model-readonly .row-even span.readonly-row-content {
+  /*actual value stored in the property*/
+
+  float: right;
+  padding: 0;
+  width: 390px;
+}
+.hidden-row {
+  /* styling for hidden field */
+  
+  display: none;
+}

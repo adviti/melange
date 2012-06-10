@@ -1,0 +1,12 @@
+{% if render %}
+<div class="block block-leaderboard-previous-leaderboards">
+  <div class="block-title">Previous Leaderboards</div>
+  <div class="block-content clearfix">
+    <select id="program_select" class="uniform">
+      {% for program, url, selected in programs %}
+        <option value="{{ url }}" {{ selected }}>{{ program }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+{% endif %}

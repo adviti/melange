@@ -1,0 +1,10 @@
+{% if render %}
+<div id="sort">
+Select program:
+ <select id="program_select">
+   {% for program, url, selected in programs %}
+     <option value="{{ url }}" {{ selected }}>{{ program }}</option>
+   {% endfor %}
+ </select>
+</div>
+{% endif %}

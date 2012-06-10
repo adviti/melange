@@ -1,0 +1,13 @@
+<div id="{{ css_prefix }}" class="block block-{{css_prefix}}">
+  <h4 id="title-section-{{ css_prefix }}">{{ survey_name}} Response</h4>
+  <div id="block-{{ css_prefix }}-content" class="block-content model-readonly">
+    {% for label, value in record %}
+      <div id="{{ css_prefix }}-{{ name|slugify }}" class="{% if forloop.counter|divisibleby:2 %}row-even{% else %}row-odd{% endif %}">
+        <label>{{ label }}</label>
+        <span class="readonly-row-content">
+          {{ value }}
+        </span>
+      </div>
+    {% endfor %}
+  </div>
+</div>

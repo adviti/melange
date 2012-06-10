@@ -1,0 +1,20 @@
+            <div class="block block-leaderboard-your-score">
+                <div class="block-title">Your Score</div>
+                <div class="block-content clearfix">
+                	<div class="user-ranking">
+                	    <div class="user-ranking-item">
+                	        <span class="cap">Score</span>
+                	        <span class="number">{{ points }}</span>
+                	        <span class="count">points</span>
+                	    </div>
+                	    <div class="user-ranking-item">
+                	        <span class="cap">Tasks</span>
+                	        <span class="number">{{ tasks }}</span>
+                	    </div>
+                	</div>
+                	<form action="{{ my_tasks_link }}" method="get">
+                		<input type="submit" class="btn" value="View my tasks" />
+                	</form>
+                </div>
+            </div>
+            <!-- end .block.block-leaderboard-your-score -->

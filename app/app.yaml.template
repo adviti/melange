@@ -1,0 +1,95 @@
+# Copyright 2008 the Melange authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# TODO(proto): uncomment and supply a Google App Engine application instance
+# application: FIXME
+# TODO(release): see the instructions in README about the "version:" field
+version: 2-0-20120115
+runtime: python
+api_version: 1
+
+builtins:
+- admin_redirect: on
+- datastore_admin: on
+- remote_api: on
+- appstats: on
+- deferred: on
+
+handlers:
+- url: /(robots.txt|favicon.ico)
+  static_files: soc/content/\1
+  upload: soc/content/(robots.txt|favicon.ico)  
+  expiration: 30d
+
+- url: /tiny_mce/.*
+  script: $PYTHON_LIB/google/appengine/ext/zipserve
+
+- url: /soc/content/(.*?)/css/(.*)
+  static_files: soc/content/css/\2
+  upload: soc/content/(.*)
+  expiration: 30d
+
+- url: /soc/content/(.*?)/images/(.*)
+  static_files: soc/content/images/\2
+  upload: soc/content/(.*)
+  expiration: 30d
+
+- url: /soc/content/(.*?)/js/(.*)
+  static_files: soc/content/js.min/\2
+  upload: soc/content/(.*)
+  expiration: 30d
+
+- url: /js/(.*?)/jlinq/(.*)
+  static_files: jlinq/\2
+  upload: jlinq/(.*)
+  expiration: 30d
+
+- url: /js/(.*?)/jquery/(.*)
+  static_files: jquery.min/\2
+  upload: jquery.min/(.*)
+  expiration: 1d
+
+- url: /js/(.*?)/json/(.*)
+  static_files: json.min/\2
+  upload: json.min/(.*)
+  expiration: 30d
+
+- url: /js/(.*?)/modernizr/(.*)
+  static_files: modernizr.min/\2
+  upload: modernizr.min/(.*)
+  expiration: 30d
+
+- url: /js/(.*?)/LABjs/(.*)
+  static_files: LABjs.min/\2
+  upload: LABjs.min/(.*)
+  expiration: 30d
+
+- url: /admin/shell.*
+  script: shell/shell.py
+  login: admin
+
+- url: /tasks/.*
+  script: main.py
+  login: admin
+
+- url: /static
+  static_dir: shell/static
+  expiration: 1d
+
+- url: /google(.*).html
+  static_files: webmaster/google\1.html
+  upload: webmaster/google(.*).html
+
+- url: /.*
+  script: main.py

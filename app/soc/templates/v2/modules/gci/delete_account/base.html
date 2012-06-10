@@ -1,0 +1,38 @@
+{% extends "v2/modules/gci/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block page_content %}
+{% if posted %}
+<div class="block block-user-message">
+  <p>You have requested your account to be deleted. All your information will be removed shortly.</p>
+</div>
+{% endif %}
+<div class="block block-page block-delete-account">
+  <div class="block-form-title">
+    <span class="title">Delete your account?</span>
+  </div>
+  <div class="block-content clearfix">
+    <p>Once your account is deleted, all your information will be gone forever.</p>
+    <p>Una vez que su cuenta se elimina toda la información se ha ido para siempre.</p>
+    <p>Une fois que votre compte est supprimé, toutes vos informations auront disparu pour toujours.</p>
+    <p>Usunięcie Twojego konta oznacza, że wszystkie związane z Tobą informacje zostaną skasowane na zawsze.</p> 
+    <form action="#" method="post" class="clearfix">
+      <p class="delete-btn-p">
+        <input value="Delete account" class="delete-btn" type="submit">
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock page_content %}

@@ -1,0 +1,877 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Google Summer of Code</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/960.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/global.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/typography.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/structure.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/menu.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/user-messages.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/forms.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/gsoc/uniform.default.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/gsoc/tables.css" />
+    
+    <!-- 
+    ////////////////////////
+      BEGIN CUSTOM SCRIPTS
+    ////////////////////////
+    -->
+    <!--
+        jQuery 1.4.2
+    -->
+    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+    
+    <!--
+        jQuery Raty
+        http://www.wbotelhos.com/raty/
+    -->
+    <script src="js/jquery.raty.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#score-average-stars').raty({
+              readOnly:  true,
+              start:     4,
+              half:		true,
+              path: 'images/',
+              starHalf:   'project-rate-star-half.png',
+              starOff:    'project-rate-star-off.png',
+              starOn:     'project-rate-star-on.png',
+            });
+            $('#score-add-stars').raty({
+            	cancel:		true,
+            	cancelPlace:  'right',
+            	cancelOff:	'project-rate-cancel-off.png',
+            	cancelOn:	'project-rate-cancel-on.png',
+            	half:		true,
+            	path: 'images/',
+            	starHalf:   'project-rate-star-half.png',
+            	starOff:    'project-rate-star-off.png',
+            	starOn:     'project-rate-star-on.png',
+            	hintList:     ['bad', 'poor', 'regular', 'good', 'great']
+            });
+        });
+    </script>
+    
+    <!--
+        Skinning form elements with Uniform
+        http://pixelmatrixdesign.com/uniform
+    -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.google-melange.com/soc/content/2-0-20110420/css/v2/gsoc/uniform.default.css" />
+    <script src="js/jquery.uniform.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(function(){
+        $("select").uniform();
+      });
+    </script>
+    
+    <!--
+        Smoothscroll for anchor links
+    -->
+    <script src="js/smoothscroll.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	$(".comment-reply").hide();
+    	$(".comment-reply-link").click(function(){
+    		$(this).toggleClass("active").next().slideToggle("slow");
+    	});
+    });
+    </script>
+    
+    
+    <!-- 
+    ////////////////////////
+      END CUSTOM SCRIPTS
+    ////////////////////////
+    -->
+    
+    <!-- 
+    ////////////////////////
+      BEGIN NEW STYLES
+    ////////////////////////
+    -->
+    <!--
+    <script src="js/jquery.dimensions.js" type="text/javascript"></script>
+    <script language="javascript">
+    	var name = "#floatMenu";
+    	var menuYloc = null;
+    		$(document).ready(function(){
+    			menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
+    			$(window).scroll(function () { 
+    				offset = menuYloc+$(document).scrollTop()+"px";
+    				$(name).animate({top:offset},{duration:500,queue:false});
+    			});
+    		});
+    </script>
+    -->
+    
+    
+    
+    
+    <style type="text/css">
+    
+    /* New menu container */
+    #menu-container {
+        margin-right: 0;
+    }
+        #main-menu {
+            float: left;
+            width: 220px;
+        }
+        #main-menu ul#main-menu-list {
+            margin-top: 0;
+            padding-top: 13px;
+            padding-bottom: 13px;
+        }
+    /* New menu container */
+    
+    /* User menu container */
+    #user-menu-container {
+        clear: left;
+        float: left;
+        position: relative;
+        width: 220px;
+    }
+    /* User menu container */
+    
+    /* User menu */
+    /*
+    #floatMenu {
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	width: 220px;
+    }
+    */
+    #floatMenu {
+        margin-top: 30px;
+    }
+        #floatMenu #user-menu-inner {
+            background: rgba(246, 246, 246, 0.6);
+            color: #333;
+            padding: 13px 10px 13px 20px;
+        }
+    	#floatMenu p.user-menu-inner-title {
+    	    color: #008dd2;
+    	    font-size: 18px;
+    	    font-weight: bold;
+    	    line-height: 1.5em;
+    	    margin: 0 0 10px 0;
+    	}
+    	#floatMenu #user-menu-list li {
+    	    display: block;
+    	    margin: 0 0 10px 0;
+    	    overflow: hidden;
+    	}
+    	#floatMenu #user-menu-list li p.user-menu-row-title {
+    	    display: block;
+    	    float: left;
+    	    font-size: 14px;
+    	    font-weight: bold;
+    	    line-height: 1.2em;
+    	    margin: 0 0 4px 0;
+    	}
+    	    #floatMenu #user-menu-list li span#user-menu-question {
+    	        background:url(images/user-menu-question.png) 0 0 no-repeat;
+    	        display: block;
+    	        float: left;
+    	        font-size: 1px;
+    	        line-height: 0;
+    	        height: 14px;
+    	        overflow: hidden;
+    	        margin: 0 0 0 5px;
+    	        text-indent: -9999em;
+    	        width: 11px;
+    	    }
+    	    #floatMenu #user-menu-list li span#user-menu-question a {
+    	        display: block;
+    	        height: 14px;
+    	        width: 11px;
+    	    }
+    	#floatMenu #user-menu-list li span.user-menu-note {
+    	    display: block;
+    	    clear: both;
+    	    font-size: 12px;
+    	    font-style: italic;
+    	    line-height: 1.3em;
+    	    margin: 0 0 4px 0;
+    	}
+    	/* User menu */
+    	
+    	/* Tooltip */
+    	.tooltip {
+    		background: #e2f1f9;
+    		border: 1px solid #c8d7df;
+    		box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+        		-moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+        		-webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+    		color: #333;
+    		font-size: 12px;
+    		line-height: 1.4em;
+    		padding: 7px 10px;
+    	}
+    	/* Tooltip */
+    	
+    	/* Slide checkboxes */
+        .iPhoneCheckContainer {
+            display: block;
+            clear: both;
+            position: relative;
+            height: 27px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .iPhoneCheckContainer input {
+            position: absolute;
+            top: 5px;
+            left: 30px;
+            opacity: 0;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        }
+        .iPhoneCheckContainer label {
+            white-space: nowrap;
+            font-size: 15px;
+            line-height: 17px;
+            font-weight: bold;
+            font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: block;
+            height: 27px;
+            position: absolute;
+            width: auto;
+            top: 0;
+            padding-top: 5px;
+            overflow: hidden;
+        }
+        .iPhoneCheckContainer, .iPhoneCheckContainer label {
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+        }
+        .iPhoneCheckDisabled {
+            opacity: 0.5;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+        }
+        label.iPhoneCheckLabelOn {
+            color: white;
+            background: url(images/ui_switch_on.png) no-repeat;
+            text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+            left: 0;
+            padding-top: 5px;
+        }
+        label.iPhoneCheckLabelOn span {
+            padding-left: 8px;
+        }
+        label.iPhoneCheckLabelOff {
+            color: #8b8b8b;
+            background: url(images/ui_switch_off.png) no-repeat right 0;
+            text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+            text-align: right;
+            right: 0;
+        }
+        label.iPhoneCheckLabelOff span {
+            padding-right: 8px;
+        }
+        .iPhoneCheckHandle {
+            display: block;
+            height: 27px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            background: url(images/ui_switch_slider_left.png) no-repeat;
+            padding-left: 3px;
+        }
+        .iPhoneCheckHandleRight {
+            height: 100%;
+            width: 100%;
+            padding-right: 3px;
+            background: url(images/ui_switch_slider_right.png) no-repeat right 0;
+        }
+        .iPhoneCheckHandleCenter {
+            height: 100%;
+            width: 100%;
+            background: url(images/ui_switch_slider_center.png);
+        }
+    	/* Slide checkboxes */
+    	
+    	/* Submit button */
+    	.form-user-proposal-assign-mentor {
+    	    clear: both;
+    	}
+    	.form-user-proposal-assign-mentor div.selector span {
+    	    width: 150px;
+    	}
+    	#form input.submit {
+    	  background: url(images/form-submit-bg.png) 0 0 repeat;
+    	  border: 0;
+    	  color: #fff;
+    	  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    	  font-size: 14px;
+    	  font-weight: bold;
+    	  height: 30px;
+    	  line-height: 30px;
+    	  padding: 0 15px;
+    	  text-transform: uppercase;
+    	}
+    	#form input.submit:hover {
+    	  cursor: pointer;
+    	}
+    	.form-user-proposal-assign-mentor input.submit {
+    	    margin: 3px 0 0 3px;   
+    	}
+    	/* Submit button */
+    	
+    </style>
+    <!-- 
+    ////////////////////////
+      END NEW STYLES
+    ////////////////////////
+    -->
+    <script src="js/jquery.ui-checkboxes.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(window).load(function() {
+          $('.on_off :checkbox').iphoneStyle({ checkedLabel: 'Yes', uncheckedLabel: 'No' });
+          $('.disabled :checkbox').iphoneStyle({ checkedLabel: 'Yes', uncheckedLabel: 'No' });
+          $('.long :checkbox').iphoneStyle({ checkedLabel: 'Enable', uncheckedLabel: 'Disable' });
+          
+          var onchange_checkbox = $('.onchange :checkbox').iphoneStyle();
+          setInterval(function toggleCheckbox() {
+            onchange_checkbox.attr('checked', !onchange_checkbox.is(':checked')).change();
+            $('span#status').html(onchange_checkbox.is(':checked').toString());
+          }, 2500);
+        });
+    </script>
+    
+    <!--
+        Cluetip:
+        http://plugins.learningjquery.com/cluetip
+    -->
+    <script src="js/jquery.cluetip.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('a.load-tooltip').cluetip({local:true, cursor: 'pointer', showTitle:false, tracking:true, dropShadow:false});
+    });
+    </script>
+</head>
+<body>
+
+<!-- 
+////////////////////////
+  BEGIN DEFAULT HEADER
+////////////////////////
+-->
+<div id="bg">
+<div id="page-header">
+    <div class="container_12">
+        <div class="grid_12">
+            <a href="homepage.html"><img src="http://www.google-melange.com/soc/content/2-0-20110420/images/v2/gsoc/logo-banner.jpg" height="156" width="924" alt="Google Summer of Code" /></a>
+        </div>
+    </div>
+</div>
+<!-- .page-header -->
+<!-- 
+////////////////////////
+  END DEFAULT HEADER
+////////////////////////
+-->
+
+<!-- 
+////////////////////////
+   BEGIN MAIN CONTENT
+////////////////////////
+-->
+<div id="main">
+    <div class="container_12">
+
+        <!-- 
+        ////////////////////////
+            BEGIN MAIN MENU
+        ////////////////////////
+        -->
+        <div id="menu-container" class="grid_3">
+        
+        <div id="main-menu">
+            <ul id="main-menu-list">
+                <li id="menu-login"><a href="javascript:void(0)">Login</a></li>
+                <li id="menu-about"><a href="javascript:void(0)">About</a></li>
+                <li id="menu-apply" class="parent"><a href="javascript:void(0)">Apply</a>
+                    <ul id="submenu">
+                        <li id="submenu-apply-student" class="active"><a href="javascript:void(0)">As a Student</a></li>
+                        <li id="submenu-apply-org"><a href="javascript:void(0)">As an Organization</a></li>
+                        <li id="submenu-apply-mentor"><a href="javascript:void(0)">As a Mentor</a></li>
+                    </ul>
+                </li>
+                <li id="menu-projects"><a href="search.html">Current &amp; Past Projects</a></li>
+                <li id="menu-events"><a href="javascript:void(0)">Events &amp; Timeline</a></li>
+                <li id="menu-connect"><a href="javascript:void(0)">Connect With Us</a></li>
+                <li id="menu-help"><a href="javascript:void(0)">Help</a></li>
+            </ul>
+        </div>
+        <!-- #main-menu -->
+        <!-- 
+        ////////////////////////
+            END MAIN MENU
+        ////////////////////////
+        -->
+        <!-- 
+        ////////////////////////
+           BEGIN USER MENU
+        ////////////////////////
+        -->
+        <div id="user-menu-container">
+        <div id="floatMenu">
+            <div id="user-menu-inner">
+                <p class="user-menu-inner-title">Proposal Actions</p>
+                <ul id="user-menu-list">
+                    <li id="user-menu-item-proposal-ignore" class="on_off">
+                        <p class="user-menu-row-title">Ignore Proposal</p> <span id="user-menu-question"><a class="load-tooltip" href="#proposal-ignore-tooltip" rel="#proposal-ignore-tooltip">?</a></span>
+                        <div id="proposal-ignore-tooltip" class="tooltip">
+                            Ignore proposal tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales, ante non porta porta.
+                        </div>
+                        <span class="user-menu-note">Please refresh the page after setting this preference.</span>
+                        <input type="checkbox" id="on_off" />
+                        <!-- Default checked:
+                        <input type="checkbox" checked="checked" id="on_off_on"/>
+                        -->
+                    </li>
+                    <li id="user-menu-item-proposal-accept" class="disabled">
+                        <p class="user-menu-row-title">Accept Proposal</p> <span id="user-menu-question"><a class="load-tooltip" href="#proposal-accept-tooltip" rel="#proposal-accept-tooltip">?</a></span>
+                        <div id="proposal-accept-tooltip" class="tooltip">
+                            Accept proposal tooltip. This is a short one.
+                        </div>
+                        <input type="checkbox" id="disabled" disabled="disabled" />
+                    </li>
+                    <li id="user-menu-item-proposal-mod" class="long">
+                        <p class="user-menu-row-title">Proposal Modifications</p> <span id="user-menu-question"><a class="load-tooltip" href="#proposal-mod-tooltip" rel="#proposal-mod-tooltip">?</a></span>
+                        <div id="proposal-mod-tooltip" class="tooltip">
+                            Only mentors that have enabled the "Wish to Mentor" preference can be selected. This can be changed in the 
+                            organization profile page under "Organization Preferences".
+                        </div>
+                        <input type="checkbox" id="long" />
+                    </li>
+                    <li id="user-menu-item-proposal-mentor" class="on_off">
+                        <p class="user-menu-row-title">Wish to Mentor</p> <span id="user-menu-question"><a class="load-tooltip" href="#proposal-mentor-tooltip" rel="#proposal-mentor-tooltip">?</a></span>
+                        <div id="proposal-mentor-tooltip" class="tooltip">
+                            Wish to mentor tooltip tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales, ante non porta porta.
+                        </div>
+                        <input type="checkbox" id="on_off" />
+                    </li>
+                    <li id="user-menu-item-assign-mentor">
+                        <p class="user-menu-row-title">Assign Mentor</p> <span id="user-menu-question"><a class="load-tooltip" href="#proposal-mentor-tooltip" rel="#proposal-mentor-tooltip">?</a></span>
+                        <form action="#" method="post" id="form" class="form-user-proposal-assign-mentor">
+                        	<select>
+                        		<option selected="selected" disabled="disabled">Mentor Name</option>
+                        		<option>Madhusudan C.S.</option>
+                        		<option>Sverre Rabbelier</option>
+                        		<option>Mario Ferraro</option>
+                        	</select>
+                        	<input id="form-user-proposal-assign-mentor-submit" type="submit" value="Assign" class="submit" />
+                        </form>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+        </div>
+        <!-- #user-menu -->
+        <!-- 
+        ////////////////////////
+            END USER MENU
+        ////////////////////////
+        -->
+        </div>
+        <!-- #menu-container.grid_3 -->
+
+        <!-- 
+        ////////////////////////
+           BEGIN PAGE CONTENT
+        ////////////////////////
+        -->
+        <div class="grid_9">
+            
+            <div class="content">
+            
+                <h1 id="project-page-title">Application for Summer of Code</h1>
+                <h2 id="project-page-student-name">Daniel Hans</h2>
+                
+                <div id="user-message" class="error">
+                This student is likely to be accepted by other organizations. Please use the contact information of the respective organizations 
+                in the table given below to resolve this situation.
+                  <table id="duplicate-orgs" class="proposal-duplicates">
+                    <tr>
+                      <th><strong>Organization Name</strong></th>
+                      <th><strong>Organization Administrators</strong></th>
+                    </tr>
+                      <tr>
+                        <td><a href="http://melange-dev.appspot.com/gsoc/org/melange/gsoc2010/gsocfanclub">GSoC Fan club</a></td>
+                        <td>
+                            <a href="mailto:ebroelephants@gmail.com">jenn &lt;ebroelephants@gmail.com&gt;</a>, 
+                            <a href="mailto:madhusudancs@gmail.com">Madhusudan C.S &lt;madhusudancs@gmail.com&gt;</a>, 
+                            <a href="mailto:tony+conflict@echoditto.com">tg &lt;tony+conflict@echoditto.com&gt;</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a href="http://melange-dev.appspot.com/gsoc/org/melange/gsoc2010/sharpdevelop_testing">SharpDevelop</a></td>
+                        <td>
+                            <a href="mailto:madhusudancs@gmail.com">Madhusudan C.S &lt;madhusudancs@gmail.com&gt;</a>
+                        </td>
+                      </tr>
+                  </table>
+                </div>
+                
+                <div class="project-short">
+                <p class="project-mentor"><strong>Mentor:</strong> No mentor assigned</p>
+                <p class="project-possible-mentor"><strong>Possible mentors:</strong> None</p>
+                <p class="description"><strong>Short description:</strong> The abstract vulputate quam in elit scelerisque vel blandit 
+                ligula placerat. Nunc non dictum eros. Donec malesuada tempus laoreet. Pellentesque vestibulum sem et enim malesuada 
+                porta. Ut posuere eros porta enim egestas et tincidunt risus laoreet. Curabitur aliquam tortor eu tortor pharetra mattis.</p>
+                </div>
+                
+                <div class="project-long">
+                <p>Curabitur ut turpis at dui sagittis gravida. Nulla nec felis dui. Donec et nisl nec nunc auctor tincidunt eu ut mauris. 
+                Suspendisse blandit erat at metus tempor sed rhoncus tortor iaculis. Aliquam pulvinar mauris ut odio semper posuere sit 
+                amet at lectus. In in turpis massa, vel lacinia quam. Proin at quam cursus orci interdum placerat. Integer dapibus 
+                imperdiet nisi sed tincidunt. Donec semper, nibh ut auctor dignissim, ante risus iaculis tellus, non convallis purus 
+                ipsum porta quam. Pellentesque eu feugiat ipsum. Aliquam euismod fringilla ornare. Donec eget eros dolor.</p>
+                
+                <p>Pellentesque sodales accumsan nulla a viverra. Aenean libero arcu, facilisis a tempus ac, rutrum in magna. Class 
+                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer non magna velit. Ut neque 
+                risus, semper vitae condimentum nec, hendrerit congue nibh. Phasellus id velit non dolor cursus lacinia vitae eu elit. 
+                Pellentesque diam magna, vulputate interdum interdum nec, dignissim in eros. Nam malesuada dui sit amet augue vulputate 
+                eget gravida augue venenatis. In quis placerat tellus. Vivamus semper lacus vitae elit gravida at ornare dolor ultricies. 
+                Duis quis eleifend tortor. Morbi ac felis lacus. Vivamus at mauris justo, ac molestie urna. Etiam eros nunc, pulvinar 
+                pharetra euismod rhoncus, placerat eu nulla. Vestibulum fringilla urna a nulla lacinia id faucibus urna egestas. Quisque 
+                posuere aliquet cursus. Sed id ligula nec urna ultricies auctor ac et orci.</p>
+                </div>
+                
+                <div class="score">
+                    <!--
+                    <div class="score-add">
+                        <strong>My score:</strong>
+                        <div id="score-add-stars" class="stars"></div>
+                    </div>
+                    -->
+                    <div class="score-average">
+                        <strong>Average score:</strong>
+                        <div id="score-average-stars" class="stars"></div>
+                        <em>4/5 out of 27 users</em>
+                    </div>
+                    <div class="score-cumulative">
+                        <strong>Cumulative score:</strong>
+                        <div class="score-cumulative-edit">100</div>
+                        <em>Out of 20 users</em>
+                    </div>
+                </div>
+                
+                <div class="project-meta">
+                    <div class="comment-link">
+                        <a href="#comment">Leave a comment</a> &middot; <a href="#comments">6 comments</a> &middot; <a href="#private-comments">2 private comments</a>
+                    </div>
+                    <div class="subscribe-link">
+                        <a href="javascript:void(0)">Subscribe to project updates</a>
+                    </div>
+                </div>
+                
+                <hr />
+                
+                <div class="project-comment-container">
+                    <div class="project-comment-box project-comment-private-container">
+                        <a name="private-comments"></a><h3>2 private comments</h3>
+                        <div class="project-comment-single">
+                            <p class="project-comment-meta"><strong>Roseanne Contreras</strong> <a href="#permalink">Tue, 3/15/11 6:30pm</a></p>
+                            <p class="project-comment-score">Score: 3</p>
+                            <p>First off, I want to say that sodales, ante non porta porta, nulla nibh vehicula nunc, pellentesque 
+                            hendrerit justo lectus lacinia lacus.</p>
+                            <p>Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Morbi gravida, ligula ut faucibus 
+                            mollis, neque libero elementum nunc, vitae malesuada ligula dolor eu nibh. Aliquam quis dolor sit amet magna 
+                            hendrerit viverra. Praesent ut erat tellus, quis rhoncus massa. Praesent vulputate quam in elit scelerisque 
+                            vel blandit ligula placerat em et enim.</p>
+                            <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                            <!--begin comment reply-->
+                            <div class="comment-reply">
+                                <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                    <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                		</div>
+                                		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                		</div>
+                            		</fieldset>
+                                </form>
+                            </div>
+                            <!--end comment reply-->
+                        </div>
+                        <div class="project-comment-single">
+                            <p class="project-comment-meta"><strong>Lee Covas</strong> <a href="#permalink">Mon, 3/14/11 1:28pm</a></p>
+                            <p class="project-comment-score">Score: 3</p>
+                            <p>You could add that maecenas porttitor augue a purus sollicitudin et egestas enim tempor. Aenean eleifend 
+                            enim eget neque venenatis sagittis. Praesent ac enim leo. Ut at velit vel ante ultricies laoreet a gravida 
+                            risus. Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Praesent ut erat tellus, quis 
+                            rhoncus massa. Praesent vulputate.</p>
+                            <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                            <!--begin comment reply-->
+                            <div class="comment-reply">
+                                <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                    <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                		</div>
+                                		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                		</div>
+                            		</fieldset>
+                                </form>
+                            </div>
+                            <!--end comment reply-->
+                        </div>
+                    </div>
+                    <div class="project-comment-box project-comment-public-container">
+                        <a name="comments"></a><h3>6 comments</h3>
+                        <div class="project-comment-single">
+                            <p class="project-comment-meta"><strong>Roseanne Contreras</strong> <a href="#permalink">Tue, 3/15/11 6:30pm</a></p>
+                            <p class="project-comment-score">Score: 3</p>
+                            <p>First off, I want to say that sodales, ante non porta porta, nulla nibh vehicula nunc, pellentesque 
+                            hendrerit justo lectus lacinia lacus.</p>
+                            <p>Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Morbi gravida, ligula ut faucibus 
+                            mollis, neque libero elementum nunc, vitae malesuada ligula dolor eu nibh. Aliquam quis dolor sit amet magna 
+                            hendrerit viverra. Praesent ut erat tellus, quis rhoncus massa. Praesent vulputate quam in elit scelerisque 
+                            vel blandit ligula placerat em et enim.</p>
+                            <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                            <!--begin comment reply-->
+                            <div class="comment-reply">
+                                <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                    <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                		</div>
+                                		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                		</div>
+                            		</fieldset>
+                                </form>
+                            </div>
+                            <!--end comment reply-->
+                            
+                            <div class="project-comment-single-reply">
+                                <p class="project-comment-meta"><strong>Matt Wade</strong> <a href="#permalink">Tue, 3/15/11 8:43pm</a> <span>in reply to Roseanne Contreras</span></p>
+                                <p class="project-comment-score">Score: 3</p>
+                                <p>You could add that maecenas porttitor augue a purus sollicitudin et egestas enim tempor. Aenean eleifend 
+                                enim eget neque venenatis sagittis. Praesent ac enim leo. Ut at velit vel ante ultricies laoreet a gravida 
+                                risus. Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Praesent ut erat tellus, quis 
+                                rhoncus massa. Praesent vulputate.</p>
+                                <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                                <!--begin comment reply-->
+                                <div class="comment-reply">
+                                    <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                    <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                        <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                    		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                    			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                    		</div>
+                                    		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                    		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                    		</div>
+                                		</fieldset>
+                                    </form>
+                                </div>
+                                <!--end comment reply-->
+                            </div>
+                            <div class="project-comment-single-reply">
+                                <p class="project-comment-meta"><strong>Matt Wade</strong> <a href="#permalink">Tue, 3/15/11 9:05pm</a> <span>in reply to Roseanne Contreras</span></p>
+                                <p class="project-comment-score">Score: 3</p>
+                                <p>You could add that maecenas porttitor augue a purus sollicitudin et egestas enim tempor. Aenean eleifend 
+                                enim eget neque venenatis sagittis. Praesent ac enim leo. Ut at velit vel ante ultricies laoreet a gravida 
+                                risus. Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Praesent ut erat tellus, quis 
+                                rhoncus massa. Praesent vulputate.</p>
+                                <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                                <!--begin comment reply-->
+                                <div class="comment-reply">
+                                    <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                    <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                        <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                    		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                    			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                    		</div>
+                                    		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                    		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                    		</div>
+                                		</fieldset>
+                                    </form>
+                                </div>
+                                <!--end comment reply-->
+                            </div>
+                            <div class="project-comment-single-reply">
+                                <p class="project-comment-meta"><strong>Jacintha Holst</strong> <a href="#permalink">Tue, 3/15/11 9:33pm</a> <span>in reply to Matt wade</span></p>
+                                <p class="project-comment-score">Score: 3</p>
+                                <p>You could add that maecenas porttitor augue a purus sollicitudin et egestas enim tempor. Aenean eleifend 
+                                enim eget neque venenatis sagittis. Praesent ac enim leo. Ut at velit vel ante ultricies laoreet a gravida 
+                                risus. Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Praesent ut erat tellus, quis 
+                                rhoncus massa. Praesent vulputate.</p>
+                                <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                                <!--begin comment reply-->
+                                <div class="comment-reply">
+                                    <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                    <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                        <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                    		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                    			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                    		</div>
+                                    		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                    		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                    		</div>
+                                		</fieldset>
+                                    </form>
+                                </div>
+                                <!--end comment reply-->
+                            </div>
+                            <div class="project-comment-single-reply">
+                                <p class="project-comment-meta"><strong>Matt Wade</strong> <a href="#permalink">Tue, 3/15/11 8:43pm</a> <span>in reply to Jacintha Holst</span></p>
+                                <p class="project-comment-score">Score: 3</p>
+                                <p>You could add that maecenas porttitor augue a purus sollicitudin et egestas enim tempor. Aenean eleifend 
+                                enim eget neque venenatis sagittis. Praesent ac enim leo. Ut at velit vel ante ultricies laoreet a gravida 
+                                risus. Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Praesent ut erat tellus, quis 
+                                rhoncus massa. Praesent vulputate.</p>
+                                <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                                <!--begin comment reply-->
+                                <div class="comment-reply">
+                                    <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                    <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                        <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                    		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                    			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                    		</div>
+                                    		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                    		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                    		</div>
+                                		</fieldset>
+                                    </form>
+                                </div>
+                                <!--end comment reply-->
+                            </div>
+                        </div>
+                        <div class="project-comment-single">
+                            <p class="project-comment-meta"><strong>Lee Covas</strong> <a href="#permalink">Mon, 3/14/11 1:28pm</a></p>
+                            <p class="project-comment-score">Score: 3</p>
+                            <p>You could add that maecenas porttitor augue a purus sollicitudin et egestas enim tempor. Aenean eleifend 
+                            enim eget neque venenatis sagittis. Praesent ac enim leo. Ut at velit vel ante ultricies laoreet a gravida 
+                            risus. Morbi tempor lorem in enim ullamcorper ac condimentum ligula lacinia. Praesent ut erat tellus, quis 
+                            rhoncus massa. Praesent vulputate.</p>
+                            <p class="comment-reply-link"><a href="javascript:void(0)">Reply</a></p>
+                            <!--begin comment reply-->
+                            <div class="comment-reply">
+                                <p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                                <form action="#" method="post" id="form" class="form-project-comment-reply">
+                                    <fieldset id="form-project-comment-reply-fieldset" class="fieldset-project-comment-reply">
+                                		<div id="form-row-project-add-comment-reply" class="row project-comment-reply-full">
+                                			<textarea name="projectcommentreplyfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment-reply"></textarea>
+                                		</div>
+                                		<div id="form-project-comment-reply-fieldset-button-row" class="row button-row">
+                                		    <input id="form-project-comment-reply-submit" type="submit" value="Submit" class="submit" />
+                                		</div>
+                            		</fieldset>
+                                </form>
+                            </div>
+                            <!--end comment reply-->
+                        </div>
+                    </div>
+                    <!-- begin comment form -->
+                    <a name="comment"></a>
+                    <form action="#" method="post" id="form" class="form-project-comment">
+                    	<fieldset id="form-project-comment-fieldset" class="fieldset-project-comment">
+                    	    <legend><span>Leave a comment</span></legend>
+                    	    <div id="form-row-project-logged-in" class="row">
+                    	    	<p class="reply-logged-in">You are logged in as Roseanne Contreras <a href="javascript:void(0)">(Not you?)</a></p>
+                    	    </div>
+                    	    <div id="form-row-project-add-rating" class="row project-comment-add-rating">
+                    	    	<label>Score</label>
+                    	    	<div id="score-add-stars" class="stars"></div>
+                    	    </div>
+                    		<div id="form-row-project-add-comment" class="row project-comment-full">
+                    		    <label>Comment</label>
+                    			<textarea name="projectcommentfull" rows="10" cols="10" class="textarea" id="form-proposal-textfield-project-comment"></textarea>
+                    		</div>
+                    		<div id="form-row-project-comment-private" class="row project-comment-private">
+                    			<label><input name="projectcommentprivate" value="Private" type="checkbox" /> Private</label>
+                    			<span class="note">Whether this comment will only be seen by admins and mentors</span>
+                    		</div>
+                    		<div id="form-project-comment-fieldset-button-row" class="row button-row">
+                    		    <input id="form-project-comment-submit" type="submit" value="Submit" class="submit" />
+                    		</div>
+                    	</fieldset>
+                    </form>
+                    <!-- end comment form -->
+                </div>
+    
+            </div>
+            <!-- .content -->
+        </div>
+        <!-- .grid_9 -->
+        <!-- 
+        ////////////////////////
+           END PAGE CONTENT
+        ////////////////////////
+        -->
+
+    </div>
+    <!-- .container_12 -->
+</div>
+<!-- .main -->
+<!-- 
+////////////////////////
+   END MAIN CONTENT
+////////////////////////
+-->
+
+<!-- 
+////////////////////////
+  BEGIN DEFAULT FOOTER
+////////////////////////
+-->
+<div id="footer">
+    <div class="container_12">
+            <div class="grid_3">&nbsp;</div>
+            <!-- .grid_3 -->
+            <div class="grid_9">
+                <div class="footer-menu">
+                    <ul id="footer-menu-list">
+                        <li id="footer-menu-about"><a href="javascript:void(0)">About</a></li>
+                        <li id="footer-menu-contact"><a href="javascript:void(0)">Contact</a></li>
+                        <li id="footer-menu-facebook" class="social"><a href="javascript:void(0)" class="fb">Facebook</a></li>
+                        <li id="footer-menu-twitter" class="social"><a href="javascript:void(0)" class="tw">Twitter</a></li>
+                        <li id="footer-menu-blogger" class="social"><a href="javascript:void(0)" class="bl">Blogger</a></li>
+                        <li id="footer-menu-email" class="social"><a href="javascript:void(0)" class="em">Email</a></li>
+                        <li id="footer-menu-irc" class="social"><a href="javascript:void(0)" class="irc">IRC</a></li>
+                        <li id="footer-menu-privacy" class="last"><a href="javascript:void(0)">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-meta">
+                    <span class="powered">Powered by <a href="http://code.google.com/p/soc/wiki/MelangeIntro" target="_blank">Melange</a></span> Empowered by <a href="http://www.echoditto.com/" target="_blank"><img src="http://www.google-melange.com/soc/content/2-0-20110420/images/v2/gsoc/echoditto.png" height="16" width="70" alt="EchoDitto" /></a>
+                </div>
+            </div>
+            <!-- .grid_9 -->
+        </div>
+        <!-- .container_12 -->
+</div>
+<!-- .footer -->
+</div>
+<!-- #bg -->
+<!-- 
+////////////////////////
+  END DEFAULT FOOTER
+////////////////////////
+-->
+
+</body>
+</html>

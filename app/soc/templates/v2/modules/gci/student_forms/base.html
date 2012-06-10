@@ -1,0 +1,68 @@
+{% extends "v2/modules/gci/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gci/forms.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gci/uniform.default.css" />
+{% endblock stylesheets %}
+
+{% block page_content %}
+{% if posted %}
+  <div class="block block-user-message">
+    <p>Data saved successfully.</p>
+  </div>
+{% else %}
+  {% if form.non_field_errors %}
+    <div class="block block-user-message">
+      <p>{{ form.non_field_errors }}</p>
+    </div>
+  {% else %}
+    {% if form.errors %}
+      <div class="block block-user-message">
+        <p>Sorry, we could not save your data. Please fix the errors mentioned below.</p>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+<div class="block block-form">
+  <div class="block-form-title">
+    <span class="title">{{ page_name }}</span>
+    <span class="req">* fields required</span>
+  </div>
+  <form method="post" enctype="multipart/form-data" id="form" class="form-submit-forms clearfix">
+    {{ form.render }}
+    <div class="form-row form-row-buttons">
+      <input value="Submit" class="button" type="submit">
+    </div>
+  </form>
+</div>
+{% endblock page_content %}
+
+{% block dependencies %}
+  [
+    dep.melange.uploadform,
+    null,
+    function() {
+      var form_name = '#form';
+      jQuery(form_name).submit(function() {
+        var url = melange.getUploadUrl();
+        jQuery(form_name).get(0).setAttribute('action', url);
+        return true;
+      });
+    }
+  ]
+{% endblock dependencies %}

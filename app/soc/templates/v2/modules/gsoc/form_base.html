@@ -1,0 +1,65 @@
+{% extends base_layout %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/forms.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/uniform.default.css" />
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+<!-- begin form -->
+{% block open_form %}
+<form action="{% if cbox %}?cbox=true{% else %}#{% endif %}" method="post" id="form" class="form-register">
+{% endblock open_form %}
+  {% if posted %}
+    {% if error %}
+      <div id="flash-message" class="flash-error">
+      <p>Sorry, we could not save your data. Please fix the errors mentioned below.</p>
+    {% else %}
+      <div id="flash-message" class="flash-success">
+      <p>Data saved successfully.</p>
+    {% endif %}
+    </div>
+  {% endif %}
+
+  {% if form_top_msg %}
+    {{ form_top_msg.render }}
+  {% endif %}
+
+  {% block form_header_msg %}
+  <h2 id="form-register-title">
+    {% if form_header_msg %}
+      {{ form_header_msg }}
+    {% else %}
+      {{ page_name }}
+    {% endif %}
+  </h2><p id="form-register-req" class="req">* fields required</p>
+  {% endblock form_header_msg %}
+
+  {% for form in forms %}
+    {{ form.render }}
+  {% endfor %}
+
+  {% block form_button %}
+    <div id="form-register-fieldset-button-row" class="row button-row">
+      <input id="form-register-submit" type="submit" value="Submit" class="submit" />
+    </div>
+  {% endblock form_button %}
+</form>
+<!-- end form -->
+
+{% endblock page_content %}

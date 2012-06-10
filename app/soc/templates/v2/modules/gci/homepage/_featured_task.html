@@ -1,0 +1,11 @@
+<div class="block block-featured-task level-difficult">
+  <div class="cog"></div>
+  <div class="block-title">Featured Task</div>
+  <div class="block-content">
+      <span class="block-featured-task-link"><a href="{{ featured_task_url }}">{{ featured_task.title }}</a></span>
+      <span class="block-featured-task-org"><em>Organization:</em> {{ featured_task.org.name }}</span>
+      <p>{{ featured_task.description|striptags|truncatewords:35 }}</p>
+  </div>
+  <div class="block-footer"><a href="{{ featured_task_url }}">Read more</a></div>
+</div>
+<!-- end .block.block-home-featured-task -->

@@ -1,0 +1,36 @@
+{% extends "v2/modules/gci/form_base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+
+{% block synchronous_scripts %}
+  <script type='text/javascript' src="/tiny_mce/tiny_mce.js"></script>
+  {{ block.super }}
+{% endblock synchronous_scripts %}
+
+
+{% block dependencies %}
+  [
+    dep.uniform,
+    null,
+    function () {
+      jQuery("select, input:radio, input:file, input:checkbox").uniform();
+      var fields = ["melange-description-textarea",
+                    "melange-contrib_template-textarea",
+                    "melange-accepted_student_msg-textarea",
+                    "melange-rejected_student_msg-textarea"];
+      tinyMCE.init(melange.tinyMceConfig(fields, "advanced"));
+    }
+  ]
+{% endblock dependencies %}

@@ -1,0 +1,12 @@
+{% if participating_orgs %}
+  <div class="block block-participating-orgs">
+    <div class="block-title">Participating Organizations</div>
+    <div class="block-content">
+      {% for org in participating_orgs %}
+        <a href="{{ org.link }}"><img src="{{ org.logo }}" alt="{{ name }}" /></a>
+      {% endfor %}
+    </div>
+    <div class="block-footer"><a href="{{ org_list_url }}">See all participating organizations</a></div>
+  </div>
+{% endif %}
+<!-- end .bolock.block-home-participating-orgs -->

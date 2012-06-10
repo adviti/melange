@@ -1,0 +1,60 @@
+{% extends "v2/modules/gsoc/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/forms.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/uniform.default.css" />
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+<!-- begin form -->
+<form action="#" method="post" id="form" class="form-register">
+  <h2 id="form-register-title">{{ form_header_message }}</h2> <p id="form-register-req" class="req">* fields required</p>
+  {{ proposal_form.render }}
+  <div id="form-row-button-row" class="row button-row">
+  {% include buttons_template %}
+  </div>
+</form>
+<!-- end form -->
+
+{% endblock page_content %}
+
+{% block synchronous_scripts %}
+  <script type='text/javascript' src="/tiny_mce/tiny_mce.js"></script>
+  {{ block.super }}
+{% endblock synchronous_scripts %}
+{% block dependencies %}
+  [
+    dep.uniform,
+    dep.counter,
+    dep.melange.gdata,
+    dep.melange.autocomplete,
+    null,
+    function () {
+      jQuery("select, input:radio, input:file, input:checkbox").uniform();
+      jQuery("#abstract").counter({
+        goal: 500
+      });
+      tinyMCE.init(melange.tinyMceConfig(["melange-content-textarea"], "advanced"));
+      melange.gdata.init({{ gdata_logged_in }},
+                         '{{ popup_oauth_redirect_url }}');
+    },
+    null,
+    tc("/soc/content/{{ app_version }}/js/templates/modules/gsoc/proposal/base.js",
+        {proposal_sync_url: "{{ proposal_sync_url }}"})
+  ]
+{% endblock dependencies %}

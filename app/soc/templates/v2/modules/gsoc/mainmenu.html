@@ -1,0 +1,48 @@
+<div id="main-menu">
+  {% block site_menu %}
+    <ul id="main-menu-list">
+      {% if home_link %}
+      <li id="menu-home"><a href="{{ home_link }}">Home</a></li>
+      {% endif %}
+      {% if login_link %}
+      <li id="menu-login"><a href="{{ login_link }}">Login</a></li>
+      {% endif %}
+      {% if profile_link %}
+      <li id="menu-profile"><a href="{{ profile_link }}">My Profile</a></li>
+      {% endif %}
+      {% if dashboard_link %}
+      <li id="menu-dashboard"><a href="{{ dashboard_link }}">My Dashboard</a></li>
+      {% endif %}
+      {% if org_dashboard_link %}
+      <li id="menu-org-dashboard"><a href="{{ org_dashboard_link }}">Org Admin Dashboard</a></li>
+      {% endif %}
+      {% if admin_link %}
+      <li id="menu-admin"><a href="{{ admin_link }}">Admin Dashboard</a></li>
+      {% endif %}
+      {% if about_link %}
+      <li id="menu-about"><a href="{{ about_link }}">About</a></li>
+      {% endif %}
+      {% if apply_link %}
+      <li id="menu-apply"><a href="{{ apply_link }}">Apply</a></li>
+      {% endif %}
+      {% if projects_link %}
+      <li id="menu-projects"><a href="{{ projects_link }}">Accepted Projects</a></li>
+      {% endif %}
+      {% if events_link %}
+      <li id="menu-events"><a href="{{ events_link }}">Events &amp; Timeline</a></li>
+      {% endif %}
+      {% if connect_link %}
+      <li id="menu-connect"><a href="{{ connect_link }}">Connect With Us</a></li>
+      {% endif %}
+      {% if search_link %}
+      <li id="menu-search"><a href="{{ search_link }}">Search</a></li>
+      {% endif %}
+      {% if help_link %}
+      <li id="menu-help"><a href="{{ help_link }}">Help</a></li>
+      {% endif %}
+      {% if logout_link %}
+      <li id="menu-logout"><a href="{{ logout_link }}">Logout</a></li>
+      {% endif %}
+    </ul>
+  {% endblock site_menu %}
+</div>

@@ -1,0 +1,15 @@
+/* No underline for <a> elements inside lists */
+.ui-jqgrid a.listsnoul {
+  text-decoration: none;
+}
+/* Style for content of the document upload dialog */
+.ui-dialog #uploading_dialog > * {
+  float:left;
+}
+.ui-dialog #uploading_dialog h3 {
+  padding: 0;
+  margin: 3px;
+}
+.alternate_row {
+  background: #F0F0F0;
+}

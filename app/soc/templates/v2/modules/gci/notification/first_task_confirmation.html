@@ -1,0 +1,51 @@
+{% extends "soc/mail/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block content %}
+<p>
+Thank you for submitting a task for Google Code-in.  Assuming your task is accepted by the related organization, you will need to supply the following documents to be eligible [0] to receive prizes.
+- a signed Parental Consent Form from your legal parent or guardian. Please visit the link below to download the Parental Consent form in your preferred language [1].
+- a copy of a pre-university, high school, or secondary school student ID or proof of enrollment*
+</p>
+
+<p>
+Once your task has been accepted you will need to do the following in order to receive any prizes:
+1.  visit {{ student_forms_link }} and
+2.  upload your signed Parental Consent form and your proof of enrollment (one at a time) in the appropriate section *before* 11:59 P.M. Pacific Standard Time on February 7, 2012.
+</p>
+
+<p>
+Please note that there will be two prize shipments: one to students who submit their forms by the end of the contest on January 16, 2012 and another to students who submit their forms by February 7, 2012. If you want to receive your prizes early, we recommend submitting your forms by January 16, 2012. 
+</p>
+
+<p>
+Remember, you only have to do this once, but PARTICIPANTS WHO FAIL TO RETURN A SIGNED PARENTAL CONSENT AND STUDENT ID BY FEBRUARY 7, 2012 WILL BE INELIGIBLE TO RECEIVE ANY PRIZES.  We want to send you prizes, so we suggest doing this as soon as your task is accepted.
+</p>
+
+[0] - http://www.google-melange.com/gci/document/show/gci_program/google/gci2011/rules<br/>
+[1] - http://code.google.com/p/google-code-in/downloads/list?can=2&q=consent+form&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount<br/>
+
+
+Thanks, <br/>
+The Google Open Source Programs Office Team
+
+<p>
+*Any one of following documents is considered acceptable proof of enrollment:
+-a scanned copy of your student identification card that shows you were enrolled as of 21 November 2011.  The card must have a date that shows you are currently enrolled: as start date sometime in 2011 by itself is not enough. 
+-a transcript or course list (official or unofficial is fine) showing the courses you were enrolled in as of 21 November 2011.  Transcript in .txt format is NOT acceptable, but a .pdf or .jpeg of the transcript is. 
+-a letter from your student affairs or admissions office stating that you were enrolled as of 21 November 2011.
+-if you are homeschooled, you must provide a proof of enrollment from your cover school.
+</p>
+{% endblock %}

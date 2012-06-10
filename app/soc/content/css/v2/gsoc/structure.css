@@ -1,0 +1,952 @@
+/*////////////////
+
+  LessCSS
+
+////////////////*/
+.imagereplace {
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999em;
+}
+/*////////////////
+
+  Structure
+
+////////////////*/
+#page-header {
+  /*logo and globe*/
+
+  background: #ffffff url(../../../images/v2/gsoc/header-bg.png) bottom left repeat-x;
+  height: 156px;
+  width: 100%;
+}
+#page-header .grid_12 {
+  height: 156px;
+}
+#page-header h1, #page-header p {
+  color: #238bd2;
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 1em;
+  margin-left: 10px;
+}
+#page-header h1 a, #page-header p a {
+  color: #238bd2;
+  text-decoration: none;
+}
+#main {
+  /*main content container*/
+
+}
+#main .grid_9 {
+  background: #f6f6f6;
+  margin-left: 0;
+}
+#main .content {
+  overflow: hidden;
+  padding: 19px;
+}
+#main .block {
+  /*every block*/
+
+  background: #fff;
+  margin-bottom: 20px;
+}
+#main .block h4 {
+  /*block title*/
+
+  background: #6eb5e5;
+  color: #fff;
+  font-size: 15px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0 0 0 7px;
+  text-transform: uppercase;
+}
+#main .block div.block-title {
+  /*block title*/
+
+  font-weight: bold;
+  background: #6eb5e5;
+  color: #fff;
+  font-size: 15px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0 0 0 7px;
+  text-transform: uppercase;
+}
+#main .block .block-content {
+  /*block content*/
+
+  overflow: hidden;
+  padding: 12px;
+}
+#main .block .block-content h5 {
+  color: #00538b;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.1em;
+  margin: 0 0 8px 0;
+}
+#main .block .block-content p {
+  color: #000;
+  font-size: 12px;
+  line-height: 1.5em;
+}
+#main .block .readmore {
+  /*read more link in block*/
+
+  background: #dedede;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 25px;
+  padding: 3px 0 3px 9px;
+}
+#main .block .readmore a {
+  color: #d5620e;
+  text-decoration: none;
+}
+#main .block .org-home-readmore {
+  /*read more link in block*/
+
+  background: #dedede;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 25px;
+  padding: 3px 0 3px 9px;
+  text-align: right;
+  font-size: 13px;
+  padding: 3px 10px 3px 9px;
+}
+#main .block .org-home-readmore a {
+  color: #d5620e;
+  text-decoration: none;
+}
+#main .home-block-1 {
+  /*how summer of code works*/
+
+  overflow: hidden;
+  width: 100%;
+}
+#main .home-block-1 h2 {
+  color: #238bd2;
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1.7em;
+  margin: 0 0 0 12px;
+}
+#main .home-block-1 h3 {
+  color: #238bd2;
+  font-size: 21px;
+  font-weight: normal;
+  margin: 0 0 0 12px;
+}
+#main .home-block-1 ol {
+  /*numbered list*/
+
+  background: url(../../../images/v2/gsoc/home-block-1-bg-center.gif) center center no-repeat;
+  float: left;
+  height: 218px;
+  list-style-type: none;
+  margin: 0 15px 0 0;
+  width: 429px;
+}
+#main .home-block-1 ol li {
+  background-position: 13px center;
+  background-repeat: no-repeat;
+  color: #238bd2;
+  height: 72px;
+  font-size: 23px;
+  font-weight: bold;
+  padding: 0 0 0 136px;
+}
+#main .home-block-1 ol li strong {
+  display: block;
+  padding: 17px 10px 0 0;
+}
+#main .home-block-1 ol li span {
+  font-size: 13px;
+}
+#main .home-block-1 ol li.first {
+  background-image: url(../../../images/v2/gsoc/home-block-1-list-1.png);
+}
+#main .home-block-1 ol li.second {
+  background-image: url(../../../images/v2/gsoc/home-block-1-list-2.png);
+}
+#main .home-block-1 ol li.second strong {
+  padding-top: 22px;
+}
+#main .home-block-1 ol li.third {
+  background-image: url(../../../images/v2/gsoc/home-block-1-list-3.png);
+}
+#main .home-block-1 .description p {
+  color: #d5620e;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0 0 0;
+  padding-right: 10px;
+  text-align: justify;
+}
+#main .content_column_1 {
+  /*homepage left column*/
+
+  float: left;
+  width: 429px;
+}
+#main .content_column_1 .block-students {
+  /*students apply now block*/
+
+  background: url(../../../images/v2/gsoc/home-block-students-bg.gif) 0 0 repeat-y;
+  color: #004371;
+  padding-bottom: 5px;
+  text-align: center;
+}
+#main .content_column_1 .block-students h3 {
+  *background: url(../../../images/v2/gsoc/home-block-students-bg.gif) 0 0 no-repeat;
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 1.9em;
+  margin: 0;
+  text-transform: lowercase;
+}
+#main .content_column_1 .block-students p {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5em;
+  margin: 0;
+}
+#main .content_column_1 .block-students p a {
+  color: #004371;
+  text-decoration: none;
+}
+#main .content_column_1 .block-students p.action {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+#main .content_column_1 .block-students p.action a {
+  background: #e57e30;
+  color: #fff;
+  padding: 3px 7px;
+}
+#main .content_column_1 .block-students p.action span {
+  padding: 0 8px;
+}
+#main .content_column_1 .block-students p.small {
+  color: #000;
+  font-size: 11px;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+#main .content_column_1 .block-featured-project {
+  /*featured project block*/
+
+}
+#main .content_column_1 .block-featured-project .block-content {
+  padding-bottom: 0;
+}
+#main .content_column_1 #block-participants-content {
+  text-align: center;
+}
+#main .content_column_1 .block-participants {
+  /*participating orgs block*/
+
+}
+#main .content_column_1 .block-participants img {
+  margin: 0 10px 0 0;
+  vertical-align: middle;
+  max-height: 65px;
+  max-width: 65px;
+}
+#main .content_column_1 .block-mentors {
+  /*mentors apply now block*/
+
+  background: url(../../../images/v2/gsoc/home-block-students-bg.gif) 0 0 no-repeat;
+  color: #004371;
+  text-align: center;
+  padding-bottom: 15px;
+}
+#main .content_column_1 .block-mentors h3 {
+  *background: url(../../../images/v2/gsoc/home-block-students-bg.gif) 0 0 no-repeat;
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 1.9em;
+  margin: 0;
+  text-transform: lowercase;
+}
+#main .content_column_1 .block-mentors p {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5em;
+  margin: 0;
+}
+#main .content_column_1 .block-mentors p a {
+  color: #004371;
+  text-decoration: none;
+}
+#main .content_column_1 .block-mentors p.action {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+#main .content_column_1 .block-mentors p.action a {
+  background: #e57e30;
+  color: #fff;
+  padding: 3px 7px;
+}
+#main .content_column_1 .block-mentors p.action span {
+  padding: 0 8px;
+}
+#main .content_column_1 .block-mentors p.small {
+  color: #000;
+  font-size: 11px;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+#main .content_column_1 .block-orgs {
+  /*orgs apply now block*/
+
+  background: url(../../../images/v2/gsoc/home-block-students-bg.gif) 0 0 no-repeat;
+  color: #004371;
+  text-align: center;
+  padding-bottom: 15px;
+}
+#main .content_column_1 .block-orgs h3 {
+  *background: url(../../../images/v2/gsoc/home-block-students-bg.gif) 0 0 no-repeat;
+  font-size: 33px;
+  font-weight: bold;
+  line-height: 1.9em;
+  margin: 0;
+  text-transform: lowercase;
+}
+#main .content_column_1 .block-orgs p {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5em;
+  margin: 0;
+}
+#main .content_column_1 .block-orgs p a {
+  color: #004371;
+  text-decoration: none;
+}
+#main .content_column_1 .block-orgs p.action {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+#main .content_column_1 .block-orgs p.action a {
+  background: #e57e30;
+  color: #fff;
+  padding: 3px 7px;
+}
+#main .content_column_1 .block-orgs p.action span {
+  padding: 0 8px;
+}
+#main .content_column_1 .block-orgs p.small {
+  color: #000;
+  font-size: 11px;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+#main .content_column_2 {
+  /*homepage right column*/
+
+  float: right;
+  width: 213px;
+}
+#main .content_column_2 .block-project-timeline .block-content {
+  padding: 12px 0 0 0;
+}
+#main .content_column_2 .block-project-timeline .block-content .block-project-timeline-countdown {
+  margin-top: 10px;
+  text-align: center;
+}
+#main .content_column_2 .block-project-timeline .block-content .block-project-timeline-countdown .deadline {
+  color: #3ba3dc;
+  display: block;
+  line-height: 1.2em;
+}
+#main .content_column_2 .block-project-timeline .block-content .block-project-timeline-countdown .countdown {
+  color: #D5620E;
+  display: block;
+  font-size: 16px;
+  margin: 10px 0 15px 0;
+}
+#main .content_column_2 .block-connect {
+  /*social network block*/
+
+}
+#main .content_column_2 .block-connect .social {
+  background-image: url(../../../images/v2/gsoc/social-icons.png);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  height: 31px;
+  float: left;
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999em;
+}
+#main .content_column_2 .block-connect .fb {
+  margin-right: 13px;
+  width: 22px;
+}
+#main .content_column_2 .block-connect .tw {
+  background-position: -36px 0;
+  margin-right: 14px;
+  width: 27px;
+}
+#main .content_column_2 .block-connect .bl {
+  background-position: -77px 0;
+  margin-right: 11px;
+  width: 26px;
+}
+#main .content_column_2 .block-connect .em {
+  background-position: -114px 0;
+  margin-right: 11px;
+  width: 28px;
+}
+#main .content_column_2 .block-connect .irc {
+  background-position: -153px 0;
+  width: 29px;
+}
+#main .content_column_2 .block-blog-feed {
+  /*recent blog posts block*/
+
+}
+#main .content_column_2 .block-blog-feed .block-content {
+  padding-bottom: 2px;
+}
+#main .content_column_2 .block-blog-feed .blog-item {
+  margin-bottom: 10px;
+}
+#main .content_column_2 .block-blog-feed .blog-item span {
+  display: block;
+  font-weight: bold;
+}
+#main .content_column_2 .block-blog-feed .blog-item .date {
+  color: #999;
+  font-size: 10px;
+  line-height: 1.1em;
+  text-transform: uppercase;
+}
+#main .content_column_2 .block-blog-feed .blog-item .title {
+  font-size: 13px;
+  line-height: 1.2em;
+}
+#main .content_column_2 .block-blog-feed .blog-item .title a {
+  text-decoration: none;
+}
+#main .block-text p {
+  margin: 0;
+}
+#main .block-text p a {
+  color: #238bd2;
+  font-weight: bold;
+}
+#main .action-link {
+  background: #EFAC4C;
+  padding: 3px 7px;
+}
+#main .action-link a {
+  color: white;
+  text-decoration: none;
+}
+#main .action-link a:link {
+  color: white;
+  text-decoration: none;
+}
+#main .action-button {
+  font-size: 21px;
+  font-weight: normal;
+  line-height: 1.3em;
+  margin: 0 0 1em 0;
+}
+#main .action-button .text {
+  color: #238BD2;
+  clear: left;
+  float: left;
+  width: 250px;
+  text-align: right;
+  margin-right: 10px;
+  padding-right: 10px;
+}
+#main .action-button .button {
+  background: url("../../../images/v2/gsoc/form-submit-bg.png") repeat scroll 0 0 transparent;
+  color: #ffffff;
+  width: 90px;
+  padding: 3px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+#main .action-button .button.disabled {
+  background: url("../../../images/v2/gsoc/form-submit-bg-blue.png") repeat scroll 0 0 transparent;
+  color: #f6f6f6;
+  width: 90px;
+  padding: 3px;
+  text-decoration: none;
+  text-align: center;
+  cursor: default;
+}
+#main #organization-name {
+  padding: 10px 0;
+}
+#main #organization-name h2 {
+  line-height: 1em;
+}
+#main .org-page-link {
+  margin: 5px 0 0 12px;
+}
+#main .project-long {
+  /* Specifically applied to proposals detailed description. The rest is separate. */
+
+}
+#main .project-long pre {
+  background: none;
+  color: #000;
+  font: 12px/1.5em Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  margin: 0;
+}
+#main .project-long pre code {
+  color: #000;
+  display: inline;
+  font: 12px/1.5em Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#main .project-long strong {
+  font-weight: bold;
+}
+#main .project-long em {
+  font-style: italic;
+}
+#main .project-long q {
+  margin-bottom: 10px;
+  border-left: 2px solid #CCCCCC;
+  font-style: normal;
+  margin-left: 2em;
+  padding-left: 1em;
+}
+#main .project-long blockquote {
+  margin-bottom: 10px;
+}
+#main .project-long h1,
+#main .project-long h2,
+#main .project-long h3,
+#main .project-long h4,
+#main .project-long h5,
+#main .project-long h6 {
+  color: #000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#main .project-long h1 {
+  font-size: 20px;
+  line-height: 1.5em;
+}
+#main .project-long h2 {
+  font-size: 18px;
+  line-height: 1.5em;
+}
+#main .project-long h3 {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+#main .project-long h4 {
+  font-size: 14px;
+  line-height: 1.5em;
+}
+#main .project-long h5 {
+  font-size: 13px;
+  line-height: 1.5em;
+}
+#main .project-long h6 {
+  font-size: 12px;
+  line-height: 1.5em;
+}
+#main #description-section-redirect-message a {
+  text-decoration: none;
+  background: #d5620e;
+  color: #fff;
+  padding: 3px 7px;
+  font-size: 13px;
+  font-weight: bold;
+}
+/*////////////////
+
+  Footer
+
+////////////////*/
+#footer {
+  /*footer container*/
+
+}
+#footer .grid_3 {
+  margin-right: 0;
+}
+#footer .grid_9 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 0;
+  padding: 20px 0 25px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+#footer .footer-meta {
+  /*powered by/empowered by*/
+
+  color: #4496ce;
+}
+#footer .footer-meta a {
+  color: #4496ce;
+  text-decoration: none;
+}
+#footer .footer-meta .powered {
+  padding-right: 15px;
+}
+#footer .footer-meta img {
+  vertical-align: bottom;
+}
+#footer .footer-meta .version {
+  font-size: 10px;
+}
+#footer .footer-menu {
+  /*menu in footer*/
+
+  float: left;
+  overflow: hidden;
+  margin: 0 0 12px 0;
+  position: relative;
+  width: 100%;
+}
+#footer .footer-menu ul {
+  clear: left;
+  float: left;
+  left: 50%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-align: center;
+}
+#footer .footer-menu ul li {
+  display: block;
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0 20px 0 0;
+  position: relative;
+  right: 50%;
+}
+#footer .footer-menu ul li a {
+  display: block;
+  text-decoration: none;
+}
+#footer .footer-menu ul li.last {
+  padding-right: 0px;
+}
+#footer .footer-menu .social {
+  /*social network links in footer*/
+
+  padding: 3px 0 0 0;
+}
+#footer .footer-menu .social a {
+  background-image: url(../../../images/v2/gsoc/social-icons.png);
+  background-position: 0 -34px;
+  background-repeat: no-repeat;
+  height: 14px;
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999em;
+}
+#footer .footer-menu .social .fb {
+  width: 16px;
+}
+#footer .footer-menu .social .tw {
+  background-position: -16px -34px;
+  width: 20px;
+}
+#footer .footer-menu .social .bl {
+  background-position: -36px -34px;
+  width: 20px;
+}
+#footer .footer-menu .social .em {
+  background-position: -56px -34px;
+  width: 24px;
+}
+#footer .footer-menu .social .irc {
+  background-position: -80px -34px;
+  margin-right: 20px;
+  width: 22px;
+}
+/*////////////////
+
+  Projects pages
+
+////////////////*/
+h2#project-page-student-name {
+  font-size: 21px;
+  font-weight: normal;
+  line-height: 1.3em;
+  margin: 0 0 10px 0;
+}
+.project-edit-link {
+  /* Edit link styling on proposal review page*/
+
+  font-size: 12px;
+  margin: 0 0 15px 0;
+}
+.project-long {
+  padding: 15px 15px 0 15px;
+}
+.project-long p {
+  line-height: 1.6em;
+  margin: 0 0 10px 0;
+}
+.project-short {
+  background: #fff;
+  border: 1px solid #ebebeb;
+  padding: 15px;
+}
+.project-short p {
+  line-height: 1.6em;
+  margin: 0;
+}
+.project-short p.project-possible-mentor {
+  margin: 0 0 10px 0;
+}
+.score {
+  display: block;
+  overflow: hidden;
+  padding: 0 0 0 18px;
+}
+.score .score-cumulative {
+  margin-left: 50px;
+}
+.score .score-cumulative .score-cumulative-edit {
+  font-weight: bold;
+  line-height: 1em;
+  margin: 5px 0 0 0;
+}
+.score .score-average, .score .score-cumulative {
+  float: left;
+}
+.score .score-average em, .score .score-cumulative em {
+  color: #989898;
+  font-size: 11px;
+  font-weight: bold;
+}
+.score .score-add {
+  float: left;
+  margin-left: 50px;
+}
+.score .stars img {
+  vertical-align: text-bottom;
+}
+.project-meta {
+  color: #238bd2;
+  display: block;
+  font-size: 11px;
+  line-height: 1em;
+  margin: 15px 0 10px 0;
+  overflow: hidden;
+}
+.project-meta a {
+  color: #238bd2;
+  font-weight: bold;
+  padding: 0 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.project-meta .comment-link {
+  float: left;
+  padding-left: 18px;
+  width: 410px;
+}
+.project-meta .subscribe-link {
+  float: right;
+  padding-right: 10px;
+  text-align: right;
+  width: 200px;
+}
+/*////////////////
+
+  Comments
+
+////////////////*/
+.project-comment-container {
+  background: #e1edf5;
+  margin: 20px auto 30px auto;
+  padding: 20px 0;
+  width: 570px;
+}
+.project-comment-container .project-comment-box {
+  background: #cde5f5;
+  display: block;
+  margin: 0 auto 16px auto;
+  overflow: hidden;
+  padding: 0;
+  width: 524px;
+}
+.project-comment-container .project-comment-box h3 {
+  color: #799EB8;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding: 10px 0 0 10px;
+  text-transform: uppercase;
+}
+.project-comment-container .project-comment-box .project-comment-single {
+  background: #f0f7fc;
+  display: block;
+  margin: 0 0 15px 0;
+  overflow: hidden;
+  padding: 15px;
+}
+.project-comment-container .project-comment-box .project-comment-single .project-comment-score {
+  color: #4d4d4d;
+  font-style: italic;
+  margin: 0 0 3px 0;
+}
+.project-comment-container .project-comment-box .project-comment-single .project-comment-meta {
+  margin: 0 0 3px 0;
+}
+.project-comment-container .project-comment-box .project-comment-single .project-comment-meta strong {
+  color: #4d4d4d;
+  font-style: italic;
+  padding-right: 5px;
+}
+.project-comment-container .project-comment-box .project-comment-single .project-comment-meta a {
+  color: #208ad3;
+  text-decoration: none;
+}
+.project-comment-container .project-comment-box .project-comment-single .project-comment-meta span {
+  color: #919191;
+  font-style: italic;
+  padding-left: 4px;
+}
+.project-comment-container .project-comment-box .project-comment-single p {
+  line-height: 1.6em;
+  margin: 0 0 8px 0;
+}
+.project-comment-container .project-comment-box .project-comment-single p.comment-reply-link {
+  display: block;
+  float: right;
+  font-size: 11px;
+  line-height: 1em;
+  margin: 0;
+}
+.project-comment-container .project-comment-box .project-comment-single p.comment-reply-link a {
+  display: block;
+  color: #208ad3;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 5px 7px 5px 7px;
+}
+.project-comment-container .project-comment-box .project-comment-single p.comment-reply-link.active a {
+  background: #cde5f5;
+}
+.project-comment-container .project-comment-box .project-comment-single-reply {
+  display: block;
+  clear: both;
+  overflow: hidden;
+  padding: 15px 0 0 0;
+}
+.project-comment-container .project-comment-box .comment-reply {
+  background: #cde5f5;
+  clear: both;
+  display: block;
+  padding: 10px 12px;
+}
+.project-comment-container .project-comment-private-container {
+  background: #dddddd;
+}
+.project-comment-container .project-comment-private-container h3 {
+  color: #666;
+}
+.project-comment-container .project-comment-private-container .project-comment-single {
+  background: #f5f5f5;
+}
+p.reply-logged-in {
+  color: #666;
+  font-style: italic;
+  font-weight: bold;
+  margin: 0 0 3px 0;
+}
+p.reply-logged-in a {
+  font-style: normal;
+  font-weight: normal;
+}
+/*////////////////
+
+  Requests
+
+////////////////*/
+.request-message p {
+  line-height: 1.6em;
+  margin: 0 0 10px 0;
+}
+.request-summary {
+  background: #fff;
+  border: 1px solid #ebebeb;
+  padding: 15px;
+}
+.request-summary p {
+  line-height: 1.6em;
+  margin: 0;
+}
+.request-response {
+  padding: 20px 0 0 0;
+}
+/*////////////////
+
+  User Login
+
+////////////////*/
+#user-login {
+  margin: 0 0 10px 0;
+  text-align: right;
+}
+#user-login p {
+  color: #989898;
+  font-style: italic;
+  margin: 0;
+}
+#user-login a {
+  font-style: normal;
+  font-weight: normal;
+}
+#sort {
+  text-align: right;
+  margin-bottom: 7px;
+  vertical-align: bottom;
+}
+#sort .selector {
+  /* make this class explicitly blank*/
+}
+#sort select {
+  min-width: 0;
+}
+#sort span {
+  width: 85px;
+  text-align: left;
+}
+/*////////////////
+
+  Buttons
+
+////////////////*/
+a.small-orange-button {
+  text-decoration: none;
+  background: url("../../../images/v2/gsoc/form-submit-bg.png") repeat scroll 0 0 transparent;
+  color: #fff;
+  padding: 3px 7px;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 3px 3px 3px 3px;
+}
+a.small-orange-button.disabled {
+  background: #736f6e;
+  color: #f6f6f6;
+}
+

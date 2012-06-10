@@ -1,0 +1,164 @@
+{% extends "v2/modules/gsoc/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/map.css" />
+{% endblock stylesheets %}
+
+
+{% block page_content %}
+<div id="organization-name" class="block full home-block-1">
+  <h2 id="title-section-organization-name">
+    {{ organization.name }}
+  </h2>
+
+  <div id="edit-page" class="org-page-link">
+    {% if edit_link %}
+      <a href="{{ edit_link }}">Edit</a>
+    {% endif %}
+    {% if invite_admin_link %}
+      | <a href="{{ invite_admin_link }}">Invite admin</a>
+    {% endif %}
+    {% if invite_mentor_link %}
+      | <a href="{{ invite_mentor_link }}">Invite mentor</a>
+    {% endif %}
+    {% if slot_transfer_link %}
+      | <a href="{{ slot_transfer_link }}">Slot transfer</a>
+    {% endif %}
+  </div>
+</div>
+
+<!-- begin block -->
+{% if project_list %}
+  {{ project_list.render }}
+{% endif %}
+<!-- end block -->
+
+<div id="organization-home" class="content_column_1">
+  <!-- begin block -->
+  <div id="organization-description" class="block block-organization-description">
+    <h4 title="title-section-organization-description">Description</h4>
+    <div id="block-organization-description-content" class="block-content">
+      <p>{{ organization.description|safe }}</p>
+    </div>
+    <div id="block-organization-description-readmore" class="org-home-readmore">
+      {% if ideas_link %}
+        <a href="{{ ideas_link}}">Ideas page &raquo;</a>
+      {% else %}
+        No ideas page URL given
+      {% endif %}&nbsp;&nbsp;
+      <a href="{{ organization.home_page|safe }}">Homepage &raquo;</a>
+    </div>
+  </div>
+  <!-- end block -->
+
+  <!-- begin block -->
+  {{ apply.render }}
+  <!-- end block -->
+
+  <!-- begin block -->
+  {% if organization.contrib_template and not students_announced %}
+  <div id="organization-application-template" class="block block-organization-application-template">
+    <h4 title="title-section-organization-application-template">Application template</h4>
+    <div id="block-organization-application-template-content" class="block-content">
+      <p>{{ organization.contrib_template|safe }}</p>
+    </div>
+  </div>
+  {% endif %}
+  <!-- end block -->
+
+</div>
+
+<div class="content_column_2">
+  <!-- begin block -->
+  {% if tags %}
+      <div id="tags" class="block block-tags">
+        <h4 id="title-section-connect-with-us">Tags</h4>
+        <div id="block-tags" class="block-content">
+          {{ tags }}
+        </div>
+      </div>
+  {% endif %}
+  <!-- end block -->
+
+  <!-- begin block -->
+  {{ contact.render }}
+  <!-- end block -->
+
+  <!-- begin block -->
+  {% if organization.feed_url %}
+    <div id="blog-feed" class="block block-blog-feed"></div>
+  {% endif %}
+  <!-- end block -->
+</div>
+
+{% if org_map_data %}
+  <!-- Begin Organization home page map block -->
+  <div id="org-home-map"></div>
+  <!-- End Organization home page map block -->
+{% endif %}
+{% endblock page_content %}
+
+{% if org_map_data %}
+  {% block synchronous_scripts %}
+    <!-- This Javascript must be loaded before the document loading completes
+         because this in turn loads another Javascript file and writes it to
+         the document which is not allowed after the document loads.
+
+         However LABjs dependency does not let the Javascript load in this
+         fashion so we load it here.
+    -->
+    <!-- This is Google Maps API v3. This version of the API is awesome
+         because we need not use API Key anymore.
+    -->
+    <script type="text/javascript"
+      src="http://maps.google.com/maps/api/js?sensor=false">
+    </script>
+    {{ block.super }}
+  {% endblock synchronous_scripts %}
+{% endif %}
+
+{% block dependencies %}
+  [
+    dep.melange.list,
+    css("/soc/content/{{ app_version }}/css/v2/gsoc/user-messages.css"),
+    {% if org_map_data %}
+      dep.melange.map,
+      function () {
+        jQuery(document).ready(function () {
+          melange.map.loadMap("org-home-map", {{ org_map_data|safe }});
+        });
+      },
+    {% endif %}
+    {% if organization.feed_url %}
+      dep.melange.blog,
+      null,
+      function () {
+        function initialize() {
+          var blog = new BlogPreview(document.getElementById("blog-feed"));
+          blog.show("{{ organization.feed_url|safe }}", 5, "Blog Feed");
+        }
+
+        jQuery(
+          function () {
+            google.load("feeds","1", {callback:initialize});
+          }
+        );
+      }
+    {% endif %}
+  ]
+{% endblock dependencies %}

@@ -1,0 +1,1 @@
+melange.templates.inherit(function(d,b){var c=function(){var a=new google.search.CustomSearchControl(b.cse_key);a.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);a.draw("cse")};jQuery(function(){melange.loadGoogleApi("search","1",{language:"en"},c)})});

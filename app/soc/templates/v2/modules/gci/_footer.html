@@ -1,0 +1,43 @@
+<div id="footer">
+  <div class="container_12">
+    <div class="grid_12">
+      <ul class="menu menu-center-inline menu-footer">
+        {% if about_link %}
+          <li><a href="{{ about_link }}">About</a></li>
+        {% endif %}
+        {% if connect_link %}
+          <li><a href="{{ connect_link }}">Contact</a></li>
+        {% endif %}
+        {% if facebook_link %}
+          <li class="social"><a href="{{ facebook_link }}"><img src="/soc/content/{{ app_version }}/images/v2/gci/icon-fb.gif" height="17" width="9" alt="Facebook" /></a></li>
+        {% endif %}
+        {% if twitter_link %}
+          <li class="social"><a href="{{ twitter_link }}"><img src="/soc/content/{{ app_version }}/images/v2/gci/icon-tw.gif" height="17" width="12" alt="Twitter" /></a></li>
+        {% endif %}
+        {% if blogger_link %}
+          <li class="social"><a href="{{ blogger_link }}"><img src="/soc/content/{{ app_version }}/images/v2/gci/icon-bl.gif" height="17" width="16" alt="Blogger" /></a></li>
+        {% endif %}
+        {% if email_id %}
+          <li class="social"><a href="{{ email_id }}"><img src="/soc/content/{{ app_version }}/images/v2/gci/icon-em.gif" height="17" width="17" alt="Email" /></a></li>
+        {% endif %}
+        {% if irc_link %}
+          <li class="social"><a href="{{ irc_link }}"><img src="/soc/content/{{ app_version }}/images/v2/gci/icon-irc.gif" height="17" width="17" alt="IRC" /></a></li>
+        {% endif %}
+        {% if privacy_policy_link %}
+          <li><a href="{{ privacy_policy_link }}">Privacy Policy</a></li>
+        {% endif %}
+        {% if terms_link %}
+          <li><a href="{{ terms_link }}">Rules</a></li>
+        {% endif %}
+      </ul>
+      <ul class="menu menu-center-inline menu-credit">
+        <li class="menu-credit-melange">Powered by <a href="http://code.google.com/p/soc/wiki/MelangeIntro" target="_blank"><img src="/soc/content/{{ app_version }}/images/v2/gci/credit-melange.png" height="17" width="69" alt="Melange" /></a></li>
+        <li class="menu-credit-echoditto">Empowered by <a href="http://www.echoditto.com/" target="_blank"><img src="/soc/content/{{ app_version }}/images/v2/gci/credit-echoditto.png" height="17" width="71" alt="EchoDitto" /></a></li>
+        <li class="menu-credit-version">Version {{ app_version }}</li>
+      </ul>
+    </div>
+      <!-- end .grid_12 -->
+  </div>
+  <!-- end .container_12 -->
+</div>
+<!--end .footer-->

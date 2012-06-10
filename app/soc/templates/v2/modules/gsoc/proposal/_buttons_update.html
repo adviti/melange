@@ -1,0 +1,6 @@
+{% if is_pending %}
+  <input type="submit" name="action" value="Update" class="submit" />
+  <input type="submit" name="action" value="Withdraw" class="submit" />
+{% else %}
+  <input type="submit" name="action" value="Resubmit" class="submit" />
+{% endif %}

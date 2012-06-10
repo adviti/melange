@@ -1,0 +1,54 @@
+{% extends "v2/modules/gci/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+
+{% block page_content %}
+  <div class="grid_6 alpha main-content">
+    {{ about_us.render }}
+    <!-- begin .block.block-news -->
+    <div id="blog-feed" class="block block-news"></div>
+    <!-- end .block.block-news -->
+  </div>
+  <!-- end .grid_6 -->
+  <div class="grid_3 omega main-side">
+    {{ contact_us.render }}
+  </div>
+  <!-- end .grid_3 -->
+  <div class="clear"></div>
+{{ open_tasks_list.render }}
+{{ completed_tasks_list.render }}
+{% endblock page_content %}
+
+{% block dependencies %}
+  [
+    dep.melange.list,
+    {% if feed_url %}
+    dep.melange.blog,
+    null,
+    function () {
+      function initialize() {
+        var blog = new BlogPreview(document.getElementById("blog-feed"));
+        blog.show("{{ feed_url|safe }}", 3, "What's New");
+      }
+
+      jQuery(
+        function () {
+          google.load("feeds","1", {callback:initialize});
+        }
+      );
+    }
+  {% endif %}
+  ]
+{% endblock dependencies %}

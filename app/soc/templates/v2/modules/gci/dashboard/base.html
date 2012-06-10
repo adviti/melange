@@ -1,0 +1,64 @@
+{% extends "v2/modules/gci/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/{{ css_path }}/dashboard.css" />
+{% endblock stylesheets %}
+
+{% block page_content %}
+  {% if student_forms_link %}
+  <div class="block block-user-message">
+    You have completed at least one task successfully
+    {% if student_id_form and consent_form %}
+      but have not submitted the Student ID and the Parental Consent forms
+    {% else %}{% if student_id_form %}
+      but have not submitted the Student ID form
+    {% else %}{% if consent_form %}
+      but have not submitted the Parental Consent form
+    {% endif %}{% endif %}{% endif %}.
+    To visit the forms submission page <a class="more" href="{{ student_forms_link }}">click here</a>
+  </div>
+  {% endif %}
+
+  <h1 id="main-page-title">{{ user_name }}'s Dashboard</h1>
+  {{ logged_in_msg.render }}
+
+  {{ program_select.render }}
+
+  {% for dashboard in dashboards %}
+    {{ dashboard.render|safe }}
+  {% endfor %}
+{% endblock page_content %}
+
+{% block dependencies %}
+  [
+    dep.melange.list,
+    css("/soc/content/{{ app_version }}/css/v2/gsoc/user-messages.css"),
+    dep.hashchange,
+    dep.melange.program_select,
+    null,
+    function() {
+      melange.program_select.makeSelector("#program_select");
+    },
+    tc("/soc/content/{{ app_version }}/js/templates/soc/dashboard/dashboard.js", {
+      'dashboard_class': 'dashboard',
+      'dashboard_link_class': 'dashboard-link',
+      'dashboard_id_suffix': '-dashboard',
+      'component_link_class': 'component-link',
+      'list_container_class': 'melange-list-container',
+    })
+  ]
+{% endblock dependencies %}

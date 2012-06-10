@@ -1,0 +1,94 @@
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  {% block meta %}
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  {% endblock meta %}
+
+  <title>{{ page_name|default:"No Page Name Present, Bug a Developer!" }}</title>
+
+  {% block stylesheets %}
+  {% endblock stylesheets %}
+
+  <!-- Include analytics tracking -->
+  {% if ga_tracking_num %}
+    {% include 'soc/site/ga.html' %}
+  {% endif %}
+</head>
+<body>
+{% block body %}
+{% endblock body %}
+
+{% block scripts %}
+  {% block synchronous_scripts %}
+  <script type="text/javascript">
+    var xsrf_token = '{{xsrf_token}}';
+  </script>
+  <script type='text/javascript' src="/js/{{ app_version }}/LABjs/LAB.js"></script>
+  {% endblock synchronous_scripts %}
+  <script type="text/javascript">
+    $LAB
+      .script("/js/{{ app_version }}/json/json2.js")
+      {% if is_local %}
+      .script("/js/{{ app_version }}/jquery/jquery-1.6.4.js").wait()
+      {% else %}
+      .script("https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js").wait()
+      {% endif %}
+      .script("/js/{{ app_version }}/jquery/jquery-cookie.js").wait()
+      .script("/soc/content/{{ app_version }}/js/melange.js").wait(
+        function () {
+          // set global configuration
+          melange.init({
+            app_version: "{{ app_version }}",
+            css_path: "{{ css_path }}",
+            {% if google_api_key %}
+            google_api_key: "{{ google_api_key }}",
+            {% endif %}
+            {% if is_local %}
+            is_local: true,
+            {% else %}
+            is_local: false,
+            {% endif %}
+            gdata_is_logged_in: {{ gdata_is_logged_in }},
+          });
+        }
+      )
+      .script("/soc/content/{{ app_version }}/js/melange.dependency.js").wait(
+        function () {
+          // Shortcuts facilities for children Django templates
+          var dep = melange.dependency.s;
+          var tc = function (script, context) {
+            return new melange.dependency.templateWithContext(script, context);
+          };
+          var css = function (css_path) {
+            return new melange.dependency.cssFile(css_path);
+          };
+          melange.dependency.loadScripts([
+            {% block default_dependencies %}
+            [
+              // List eventual default dependencies here
+            ],
+            {% endblock default_dependencies %}
+            {% block dependencies %}
+            null
+            {% endblock dependencies %}
+          ]);
+        }
+      );
+  </script>
+{% endblock scripts %}
+</body>
+</html>

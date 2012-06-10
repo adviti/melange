@@ -1,0 +1,227 @@
+/*////////////////
+
+  LessCSS
+
+////////////////*/
+
+@darkblue: #00538b;
+@orange: #d5620e;
+@lightblue: #238bd2;
+@lightbluebg: #6eb5e5;
+@grey: #f6f6f6;
+
+
+/*////////////////
+
+  Action buttons
+
+////////////////*/
+
+/* User menu container */
+#user-menu-container {
+    clear: left;
+    float: left;
+    position: relative;
+    width: 220px;
+}
+/* User menu container */
+
+/* User menu */
+#floatMenu {
+    margin-top: 30px;
+    /*
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 220px;
+    */
+
+    #user-menu-inner {
+        background: rgba(246, 246, 246, 0.6);
+        color: #333;
+        padding: 13px 10px 13px 20px;
+    }
+    p.user-menu-inner-title {
+        color: #008dd2;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1.5em;
+        margin: 0 0 10px 0;
+    }
+    #user-menu-list li {
+        display: block;
+        margin: 0 0 10px 0;
+        overflow: hidden;
+
+        p.user-menu-row-title {
+            display: block;
+            float: left;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.2em;
+            margin: 0 0 4px 0;
+        }
+        span {
+            &#user-menu-question {
+                background:url(../../../images/v2/gsoc/user-menu-question.png) 0 0 no-repeat;
+                display: block;
+                float: left;
+                font-size: 1px;
+                line-height: 0;
+                height: 14px;
+                overflow: hidden;
+                margin: 0 0 0 5px;
+                text-indent: -9999em;
+                width: 11px;
+
+                a {
+                    display: block;
+                    height: 14px;
+                    width: 11px;
+                }
+            }
+            &.user-menu-note {
+                display: block;
+                clear: both;
+                font-size: 12px;
+                font-style: italic;
+                line-height: 1.3em;
+                margin: 0 0 4px 0;
+            }
+        }
+        form select {
+            width: 100%;
+        }
+    }
+}
+/* User menu */
+
+/* Tooltip */
+.tooltip {
+    background: #e2f1f9;
+    border: 1px solid #c8d7df;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+    color: #333;
+    font-size: 12px;
+    line-height: 1.4em;
+    padding: 7px 10px;
+}
+/* Tooltip */
+
+/* Slide checkboxes */
+.iPhoneCheckContainer {
+    display: block;
+    clear: both;
+    position: relative;
+    height: 27px;
+    cursor: pointer;
+    overflow: hidden;
+
+    input {
+        position: absolute;
+        top: 5px;
+        left: 30px;
+        opacity: 0;
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    }
+    label {
+        white-space: nowrap;
+        font-size: 15px;
+        line-height: 17px;
+        font-weight: bold;
+        font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: block;
+        height: 27px;
+        position: absolute;
+        width: auto;
+        top: 0;
+        padding-top: 5px;
+        overflow: hidden;
+    }
+}
+.iPhoneCheckContainer, .iPhoneCheckContainer label {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+}
+
+.iPhoneCheckDisabled {
+    opacity: 0.5;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
+
+label.iPhoneCheckLabelOn {
+    color: white;
+    background: url(../../../images/v2/gsoc/ui_switch_on.png) no-repeat;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
+    left: 0;
+    padding-top: 5px;
+
+    span {
+        padding-left: 8px;
+    }
+}
+
+label.iPhoneCheckLabelOff {
+    color: #8b8b8b;
+    background: url(../../../images/v2/gsoc/ui_switch_off.png) no-repeat right 0;
+    text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+    text-align: right;
+    right: 0;
+    
+    span {
+        padding-right: 8px;
+    }
+}
+
+.iPhoneCheckHandle {
+    display: block;
+    height: 27px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    background: url(../../../images/v2/gsoc/ui_switch_slider_left.png) no-repeat;
+    padding-left: 3px;
+}
+.iPhoneCheckHandleRight {
+    height: 100%;
+    width: 100%;
+    padding-right: 3px;
+    background: url(../../../images/v2/gsoc/ui_switch_slider_right.png) no-repeat right 0;
+}
+.iPhoneCheckHandleCenter {
+    height: 100%;
+    width: 100%;
+    background: url(../../../images/v2/gsoc/ui_switch_slider_center.png);
+}
+/* Slide checkboxes */
+
+#user-menu-add-another-link {
+    display: block;
+    clear: both;
+    font-size: 11px;
+    padding-right: 5px;
+    text-align: right;
+}
+#newlink {
+    .user-menu-remove-link {
+        display: block;
+        font-size: 11px;
+        margin-bottom: 5px;
+    
+        &:last {
+            margin-bottom: 0;
+        }
+    }
+    > select {
+        margin-bottom: 5px;
+    }
+}

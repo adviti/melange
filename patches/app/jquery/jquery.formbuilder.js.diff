@@ -1,0 +1,12 @@
+diff --git a/app/jquery/jquery.formbuilder.js b/app/jquery/jquery.formbuilder.js
+--- a/app/jquery/jquery.formbuilder.js
++++ b/app/jquery/jquery.formbuilder.js
+@@ -381,7 +381,7 @@
+ 					$.ajax({
+ 						type: "POST",
+ 						url: opts.save_url,
+-						data: $(ul_obj).serializeFormList(),
++						data: {form: $(ul_obj).serializeFormList(), xsrf_token: window.xsrf_token},
+ 						success: function(xml){  }
+ 					});
+ 				}

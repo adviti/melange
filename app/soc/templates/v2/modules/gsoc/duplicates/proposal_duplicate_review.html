@@ -1,0 +1,46 @@
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+<div id="user-message" class="error">
+  This student is likely to be accepted by
+  {% if orgs|length == 1 %}
+    another organization.
+  {% else %}{% if orgs|length > 1 %}
+    other organizations.
+  {% endif %}{% endif %}
+  Please use the contact information of the
+  {% if orgs|length == 1 %}
+    corresponding organization
+  {% else %}{% if orgs|length > 1 %}
+    respective organizations
+  {% endif %}{% endif %}
+  in the table given below to resolve this situation.
+
+  <table id="duplicate-orgs" class="proposal-duplicates">
+    <tr>
+      <th><strong>Organization Name</strong></th>
+      <th><strong>Organization Administrators</strong></th>
+    </tr>
+    {% for org in orgs %}
+      <tr>
+        <td><a href="{{ org.link }}">{{ org.name }}</a></td>
+        <td>
+          {% for admin in org.admins %}
+            <a href="mailto:{{ admin.email }}">"{{ admin.name }}" &lt;{{ admin.email }}&gt;</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>

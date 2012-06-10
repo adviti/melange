@@ -1,0 +1,65 @@
+<div class="block-comments clearfix">
+  <span class="block-comments-title">Comments</span>
+
+  {% if profile %}
+    {% if comment_form %}
+      <a href="javascript:void(0)" class="task-btn task-btn-comment-new">Post new comment</a>
+      <div class="block-comments-post-new">
+        <span class="block-comments-post-new-title">Post new comment</span>
+        <form action="?reply=self" method="post" class="form-comment-post-new clearfix">
+          {{ comment_form.render }}
+          <div class="form-row form-row-buttons">
+            <input value="Submit" class="button" type="submit">
+          </div>
+        </form>
+      </div>
+    {% endif %}
+    <!--end .block-comments-post-new-->
+  {% else %}
+    {% if user %}
+      Click <a href="{{ student_reg_link }}">here</a> to register as a student so you can leave comments and work on tasks.
+    {% else %}
+      Click <a href="{{ login }}">here</a> to login and leave a comment.
+    {% endif %}
+  {% endif %}
+
+  {% for comment_item in comments %}
+    <div id="c{{ comment.key.id }}" class="single-comment">
+
+      <span class="single-comment-title">{{ comment_item.entity.title|default:"No Title" }}</span>
+      <span class="single-comment-meta">by 
+      {% if comment_item.author_link %}
+      <a href="{{ comment_item.author_link }}">{{ comment_item.entity.created_by.name }}</a>
+      {% else %}
+        {% if comment_item.entity.created_by %}{{ comment_item.entity.created_by.name }}{% else %}Melange{% endif %}
+      {% endif %}
+      {{ comment_item.entity.created_on|date:"F j Y H:i"}} UTC</span>
+
+      <p>{{ comment_item.entity.content|default:""|safe|linebreaks }}</p>
+      {% if comment_item.entity.changes %}
+        <p><b>Changes:</b> {{ comment_item.entity.changes|join:"; " }}</p>
+      {% endif %}
+
+      {% if comment_item.form and profile %}
+        <a href="javascript:void(0)" class="task-btn task-btn-comment-reply">Reply</a>
+        <div class="single-comment-reply">
+          <span class="single-comment-reply-title">Reply</span>
+          <form action="?reply={{ comment.key.id }}" method="post" class="form-comment-reply clearfix">
+            {{ comment_item.form.render }}
+            <div class="form-row form-row-buttons">
+              <input value="Submit" class="button" type="submit">
+            </div>
+          </form>
+        </div>
+        <!--end .single-comment-reply-->
+      {% endif %}
+
+    </div>
+    <!-- end .single-comment -->
+  {% empty %}
+    <div class="single-comment">
+      <span class="single-comment-title">No comments yet</span>
+    </div>
+  {% endfor %}
+</div>
+<!-- end .block-comments -->

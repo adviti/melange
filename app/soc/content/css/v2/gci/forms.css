@@ -1,0 +1,17 @@
+/*
+GCI forms specific CSS.
+*/
+
+.block-flash.success {/*Form successfully saved message*/
+    background: #68dd94;
+    border: 1px solid #15913b;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.block-flash.error {/*Form successfully saved message*/
+    background: #ffeb8e;
+    border: 1px solid #ff9c00;
+    padding: 10px 15px;
+    text-align: center;
+}

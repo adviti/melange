@@ -1,0 +1,119 @@
+<div class="cog"></div>
+
+<div class="block-title clearfix">
+  <div class="block-task-title">
+    <span class="title">{{ task.title }}</span>
+    <span class="project">{{ task.org.name }}</span>
+  </div>
+
+  <div class="block-task-action">
+    {% if is_task_mentor %}
+      <span class="block-task-action-title">You are mentor for this task.</span>
+    {% else %}
+      {% if is_owner %}
+        <span class="block-task-action-title">This is your current task!</span>
+      {% else %}
+        {% if is_claimed %}
+          <span class="block-task-action-title">This task is claimed.</span>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    <form action="?button" method="post">
+      {% if button_unpublish %}<input type="submit" class="task-btn task-btn-publish" name="button_unpublish" value="Unpublish">
+      {% else %}{% if button_delete %}<div class="task-btn task-tbn-publish"></div>{% endif %}
+      {% endif %}
+      {% if button_edit %}<input type="submit" class="task-btn task-btn-edit" name="button_edit" value="Edit Task">{% endif %}
+      {% if button_delete %}<input type="submit" class="task-btn task-btn-delete" name="button_delete" value="Delete">{% endif %}
+      {% if button_close %}<input type="submit" class="task-btn task-btn-close" name="button_close" value="Mark task as closed">{% endif %}
+      {% if button_needs_work %}<input type="submit" class="task-btn task-btn-needswork" name="button_needs_work" value="Needs more work">{% endif %}
+      {% if button_assign %}<input type="submit" class="task-btn task-btn-approve" name="button_assign" value="Assign">{% endif %}
+      {% if button_unassign %}<input type="submit" class="task-btn task-btn-unassign" name="button_unassign" value="Unassign task">{% endif %}
+      {% if button_claim %}<input type="submit" class="btn btn-claim-task" name="button_claim" value="Claim this task!">{% endif %}
+      {% if button_unclaim %}<input type="submit" class="task-btn task-btn-unclaim" name="button_unclaim" value="Unclaim task">{% endif %}
+      {% if button_subscribe %}<input type="submit" class="task-btn task-btn-subscribe-updates" name="button_subscribe" value="Subscribe to updates">{% endif %}
+      {% if button_unsubscribe %}<input type="submit" class="task-btn task-btn-unsubscribe-updates" name="button_unsubscribe" value="Unsubscribe from updates">{% endif %}
+    </form>
+  </div>
+</div>
+
+<div class="block-task-difficulty">
+  <span class="difficulty">Difficulty: <span class="emph">{{ task.difficulty_level }}</span></span>
+  <span class="status">Status: <span class="emph">{{ task.status }}</span></span>
+  {% if task.deadline %}
+    <span class="remaining">Time left: <span class="emph">{% if remaining_days %}{{ remaining_days }} days {% endif %}{{ remaining_hours }} hrs {{ remaining_minutes }} min</span></span>
+  {% else %}
+    <span class="remaining">Time to complete: <span class="emph">{{ task.time_to_complete }} hrs</span></span>
+  {% endif %}
+  <span class="mentor">Mentors: <span class="emph">{{ mentors|join:", " }}</span></span>
+  {% if task.tags %}
+  <span class="tags">Tags: <span class="emph">{{ task.tags|join:", " }}</span></span>
+  {% endif %}
+</div>
+
+<div class="block-content clearfix">
+  {% if task.deadline or button_extend_deadline  %}
+  <div class="block-task-countdown">
+    <div class="stopwatch percent-{{ stopwatch_percentage }} clearfix">
+      {% if task.deadline %}
+        <div class="stopwatch-watch"></div>
+        <div class="stopwatch-svgcanvas">
+        </div>
+        <div class="stopwatch-front">
+        </div>
+        <div class="stopwatch-dial">
+        </div>
+
+        <div class="stopwatch-remaining clearfix">
+          <div class="stopwatch-time">
+            <div class="stopwatch-time-c">
+
+              {% if remaining_days %}
+                <div class="time time-first">
+                  <span class="number">{{ remaining_days }}</span><span class="cap">days</span>
+                </div>
+                <div class="time">
+                  <span class="number">{{ remaining_hours }}</span><span class="cap">hours</span>
+                </div>
+              {% else %}
+                <div class="time time-first">
+                  <span class="number">{{ remaining_hours }}</span><span class="cap">hours</span>
+                </div>
+                <div class="time">
+                  <span class="number">{{ remaining_minutes }}</span><span class="cap">minutes</span>
+                </div>
+              {% endif %}
+
+            </div>
+          </div>
+          <span class="remain">Remaining</span> <span class="timestamp">as of {% now "n/j @H:i" %}UTC</span>
+        </div>
+      {% endif %}
+      {% if button_extend_deadline %}
+        <input type="submit" class="task-btn task-btn-extended-deadline" value="Extend deadline" />
+        <div id="deadline-extend">
+          <div id="deadline-extend-close">x</div>
+          <div class="deadline-extend-top"></div>
+          <div class="deadline-extend-content">
+            <span class="plus">+ </span>
+            <form action="?button" method="post" class="clearfix">
+              <fieldset id="fieldset-error">
+                <div class="form-row">
+                  <input value="" name="hours" id="hours" type="text"> <span class="time">hours</span>
+                </div>
+                <input value="Confirm" class="task-btn task-btn-confirm-extended-deadline" name="button_extend_deadline" type="submit">
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    <!-- end .stockwatch -->
+  </div>
+    <!-- end .block-task-countdown -->
+  {% endif %}
+
+  <div class="block-task-description">
+    {{ task.description|safe }}
+  </div>
+  <!-- end .block-task-description -->
+</div>

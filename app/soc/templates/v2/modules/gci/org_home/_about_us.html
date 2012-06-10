@@ -1,0 +1,15 @@
+<div class="block">
+  <div class="block-title">About Us</div>
+  <div class="block-content">
+    <a href="{{ homepage }}">
+      {% if logo_url %}
+        <img src="{{ logo_url }}" alt="{{ short_name }}" width="65" height="65" />
+      {% else %}
+        <h4>{{ short_name }}</h4>
+      {% endif %}
+    </a>
+    {% if description %}
+      <p>{{ description|safe }}</p>
+    {% endif %}
+   </div>
+ </div>

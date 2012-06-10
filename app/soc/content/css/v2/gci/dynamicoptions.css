@@ -1,0 +1,154 @@
+/*//////////////////////////////////////////////////////////////
+
+    CSS for adding options dynamically for HTML Select widget
+
+///////////////////////////////////////////////////////////////*/
+
+/* @group Global */
+button, input, textarea {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 13px;
+}
+a, a:active, a:visited {
+    color: #f28c00;
+    text-decoration: none;
+}
+input::-moz-focus-inner {/*Remove FF button padding*/
+    border: 0;
+    padding: 0;
+}
+.clearfix:before,
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+.clearfix:after {clear: both;}
+.clearfix {zoom: 1;} /* IE < 8 */
+/* @end */
+
+/* @group Wrappers */
+ul, ul li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul.frmb {/*Each form item*/
+}
+
+ul.frmb li {
+    margin: 10px 0;
+}
+
+.legend {/*Form item title*/
+    background: #6EB5E5;
+    color: #fff;
+    cursor: move;
+    font-size: 14px;
+    padding: 5px;
+}
+/* @end */
+
+/* @group Buttons/Triggers */
+.frmb-submit {/*Style all button elements*/
+    background: #E57E30;
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 7px;
+}
+.frmb-submit {/*Save + Preview*/
+    display: block;
+    float: left;
+    margin-top: 10px;
+}
+
+.legend .toggle-form {
+    background: #f6f6f6 url(../../../images/ui-icons_ef8c08_256x240.png) 0 0 no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    height: 16px;
+    width: 16px;
+    display: block;
+    text-indent: -9999em;
+    font-size: 1px;
+    overflow: hidden;
+    line-height: 0;
+}
+.legend .toggle-form {/*Hide*/
+    background-position: -16px -192px;
+    float: right;
+}
+.legend .toggle-form.closed {/*Show*/
+    background-position: 0 -192px;
+}
+a.del-button {/*Delete*/
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    clear: both;
+    color: #b6b6b6;
+    display: block;
+    float: right;
+    font-size: 11px;
+    font-weight: bold;
+    height: 16px;
+    line-height: 16px;
+    margin: 0 5px 0 0;
+    padding: 0 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+a.remove,
+a.add {/*Checkbox Add & Remove*/
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    font-weight: bold;
+    height: 16px;
+    line-height: 16px;
+    margin: 3px 0 0 5px;
+    text-transform: uppercase;
+    color: #f28c00;
+    text-decoration: none;
+}
+a.add {
+    font-size: 14px;
+    margin: 0;
+    display: block;
+    float: left;
+    padding: 0 4px;
+}
+a.remove {
+    font-size: 11px;
+    padding: 4px 4px;
+}
+.legend .toggle-form:hover,
+.del-button:hover,
+a.remove:hover,
+a.add:hover {/*Hover states*/
+    border: 1px solid #fbcb09;
+    background-color: #fdf5ce;
+}
+.del-button:hover {
+    color: #f28c00;
+}
+/* @end */
+
+.add-area {
+    margin-top: 10px;
+}
+
+input[type="text"].tagfield, input[type="text"].tagfield {
+    margin: 10px;
+    width: 200px;
+}

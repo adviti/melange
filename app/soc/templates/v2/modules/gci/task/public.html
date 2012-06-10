@@ -1,0 +1,83 @@
+{% extends "v2/modules/gci/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block page_content %}
+
+  <div class="block block-task block-task-{%if is_mentor %}mentor{% else %}student{% endif %} {%if block_task_type %}block-task-{{ block_task_type }}{% endif %} level-{{ task.difficulty_level|lower }}">
+    {{ task_info.render }}
+    {% if work_submissions %}
+      {{ work_submissions.render }}
+    {% endif %}
+    {% if comments %}
+      {{ comments.render }}
+    {% endif %}
+  </div>
+
+{% endblock page_content %}
+
+{% block synchronous_scripts %}
+  {% if comments %}
+  <script type='text/javascript' src="/tiny_mce/tiny_mce.js"></script>
+  {% endif %}
+  {{ block.super }}
+{% endblock synchronous_scripts %}
+
+{% block dependencies %}
+  [
+    dep.melange.clock,
+    dep.melange.uploadform,
+    null,
+    function () {
+      {% if comments %}
+      fields = ["melange-content-textarea"
+          {% for id in comment_ids %}
+            , "melange-content-textarea-{{ id }}"
+          {% endfor %}
+      ];
+      tinyMCE.init(melange.tinyMceConfig(fields));
+      {% endif %}
+      <!-- Task pages: Hide/show reply box -->
+      jQuery(document).ready(function(){
+        jQuery(".task-btn-comment-reply").click(function(){
+          jQuery(this).toggleClass("active").next().slideToggle("slow");
+        });
+
+        jQuery(".task-btn-comment-new").click(function(){
+          jQuery(this).toggleClass("active").next().slideToggle("slow");
+        });
+
+        jQuery(".task-btn-extended-deadline").click(function() {
+            var test = $(this).val();
+            jQuery("#deadline-extend").toggle();
+        });
+
+        jQuery("#deadline-extend-close").click(function() {
+            var test = $(this).val();
+            jQuery("#deadline-extend").toggle();
+        });
+
+        /* Fancy dynamic remaining time displaying clock */
+        melange.clock.loadClock({{ complete_percentage }});
+
+        var form_name = "#file-form";
+        jQuery(form_name).submit(function() {
+          var url = melange.getUploadUrl();
+          jQuery(form_name).get(0).setAttribute('action', url);
+          return true;
+        });
+      });
+    }
+  ]
+{% endblock dependencies %}

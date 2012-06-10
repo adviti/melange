@@ -1,0 +1,61 @@
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+<div class="dashboard{% if not enabled %} disabled{% endif %}" id="{{ name }}-dashboard">
+  <div class="dashboard-head">
+    <span>
+      {% if backlinks %}
+        {% for backlink in backlinks %}
+          <a class="dashboard-link" href="#{{ backlink.to }}">{{ backlink.title }}</a>&nbsp;/
+        {% endfor %}
+      {% endif %}
+      {{ title|safe }}
+    </span>
+  </div>
+  <div class="block block-dashboard">
+    {% for column in subpages %}
+    <div class="column{% if forloop.first %} first{% endif %}">
+        {% for subpage in column %}
+          <div class="column-entry {{ subpage.name }}">
+            <h4>
+              <a class="{% if not subpage.link %}dashboard-link{% if subpage.component_link %} component-link{% endif %}{% endif %}"
+                 href="{% if subpage.link %}{{ subpage.link }}{% else %}#{{ subpage.name }}{% endif %}"
+                 title="{{ subpage.title }}">{{ subpage.title }}</a>
+              {% if subpage.notificon %}
+                <span class="notificon" title="{{ subpage.notificon.title }}">{{ subpage.notificon.qty }}</span>
+              {% endif %}
+            </h4>
+            <p>{{ subpage.description|safe }}</p>
+            {% if subpage.subpage_links %}
+              <div>
+                {% for sublink in subpage.subpage_links %}
+                  {% if sublink.link %}
+                    <a href="{{ sublink.link }}" title="{{ sublink.title }}">{{ sublink.title }}</a>
+                  {% else %}
+                    <a class="dashboard-link" href="#{{ sublink.name }}" title="{{ sublink.title }}">{{ sublink.title }}</a>
+                  {% endif %}
+                  {% if not forloop.last %}|{% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% for component in components %}
+      {{ component.render|safe }}
+    {% endfor %}
+  </div>
+</div>

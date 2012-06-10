@@ -1,0 +1,64 @@
+{% extends base_layout %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block page_content %}
+<div id="organization-name" class="block full home-block-1">
+  <h2 id="title-profile-show">
+    Profile - {{ program_name }}
+  </h2>
+
+  {% if update_link %}
+    <div id="edit-page" class="org-page-link">
+      <a href="{{ update_link }}">Update</a>
+    </div>
+  {% endif %}
+
+  {% if submit_tax_link and submit_enrollment_link %}
+    <div id="submit-link" class="org-page-link">
+      <a href="{{ submit_tax_link }}">Submit tax form</a>
+      | <a href="{{ submit_enrollment_link }}">Submit enrollment form</a>
+    </div>
+  {% endif %}
+</div>
+
+
+<!-- begin user block -->
+{{ user.render }}
+<!-- end user block -->
+
+<!-- begin profile block -->
+{{ profile.render }}
+<!-- end profile block -->
+
+<!-- begin link block -->
+{% for link in links %}
+  {{ link|urlizetrunc:50 }}
+{% endfor %}
+<!-- end link block -->
+
+{% endblock page_content %}
+
+
+{% block dependencies %}
+  [
+    dep.uniform,
+    dep.melange.main,
+    css("/soc/content/{{ app_version }}/css/v2/gsoc/readonly.css"),
+    css("/soc/content/{{ app_version }}/css/v2/gsoc/map.css"),
+    tc("/soc/content/{{ app_version }}/js/templates/modules/gsoc/profile_readonly.js", {
+      '_css_prefix': '{{ css_prefix }}'
+    })
+  ]
+{% endblock dependencies %}

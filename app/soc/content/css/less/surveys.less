@@ -1,0 +1,238 @@
+/*////////////////
+
+  LessCSS
+
+////////////////*/
+
+/* @group Global */
+button, input, textarea {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 13px;
+}
+input::-moz-focus-inner {/*Remove FF button padding*/
+    border: 0;
+    padding: 0;
+}
+a, a:active, a:visited {
+    color: #f28c00;
+    text-decoration: none;
+}
+.clearfix {
+    zoom: 1; /* IE < 8 */
+    &:before, &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+/* @end */
+
+/* @group Wrappers */
+#form-builder {/*Parent UL*/
+    margin: 10px 0;
+    padding: 0;
+
+    li {/*Each form item*/
+        background: #DEDEDE;
+        list-style: none;
+        margin-bottom: 5px;
+    }
+    .legend {/*Form item title*/
+        background: #6EB5E5;
+        color: #fff;
+        cursor: move;
+        font-size: 14px;
+        padding: 5px;
+    }
+    .legend .toggle-form {
+        background: #f6f6f6 url(../../../images/ui-icons_ef8c08_256x240.png) 0 0 no-repeat;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        height: 16px;
+        width: 16px;
+        display: block;
+        text-indent: -9999em;
+        font-size: 1px;
+        overflow: hidden;
+        line-height: 0;
+        background-position: -16px -192px;
+        float: right;
+        
+        &.closed {/*Show*/
+            background-position: 0 -192px;
+        }
+    }
+    .del-button {/*Delete*/
+        background: #f6f6f6;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        clear: both;
+        color: #b6b6b6;
+        display: block;
+        float: right;
+        font-size: 11px;
+        font-weight: bold;
+        height: 16px;
+        line-height: 16px;
+        margin-right: 5px;
+        padding: 0 4px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    a {
+
+        &.remove, &.add {/*Checkbox Add & Remove*/
+            background: #f6f6f6;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            display: block;
+            float: left;
+            font-size: 11px;
+            font-weight: bold;
+            height: 16px;
+            line-height: 16px;
+            margin: 3px 0 0 10px;
+            padding: 0 4px;
+            text-transform: uppercase;
+            color: #f28c00;
+            text-decoration: none;
+        }
+        &.add {
+            margin: 0;
+
+            &:hover {/*Hover states*/
+                border: 1px solid #fbcb09;
+                background-color: #fdf5ce;
+            }
+        }
+    }
+    .legend .toggle-form:hover,
+    .del-button:hover,
+    a.remove:hover {/*Hover states*/
+        border: 1px solid #fbcb09;
+        background-color: #fdf5ce;
+    }
+    .del-button:hover {
+        color: #f28c00;
+    }
+}
+
+#form-wrap {/*Form wrap DIV*/
+    width: 600px;
+
+    button {/*Style all button elements*/
+        background: #E57E30;
+        border: 0;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 3px 7px;
+    }
+    #save-form, #preview-form {/*Save + Preview*/
+        display: block;
+        float: left;
+        margin-top: 10px;
+    }
+    #preview-form {
+        margin-left: 10px;
+    }
+}
+/* @end */
+
+/* @group Form Items */
+.frm-holder {/*Container for .frm-elements*/
+    display: block;
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+.frm-elements {/*Inner form item contrainer*/
+    background: #fff;
+    border-left: 1px solid #DEDEDE;
+    border-right: 1px solid #DEDEDE;
+    display: block;
+    margin-bottom: 5px;
+    padding: 10px;
+
+    label {
+        width: 120px;
+        float: left;
+        margin: 0 15px;
+        line-height: 24px;
+    }
+    .false-label {
+        width: 120px;
+        float: left;
+        margin: 0 15px;
+        line-height: 24px;
+    }
+    input[type=text] {
+        float: left;
+        width: 280px;
+    }
+    .fields {
+        float: left;
+
+        input[type=checkbox], input[type=radio] {
+            float: left;
+            margin: 5px 10px 0 0;
+        }
+        input[type=text] {
+            width: 220px;
+            margin-top: 0;
+        }
+        div {
+            clear: both;
+            float: left;
+            width: 380px;
+            margin-bottom: 5px;
+        }
+        label.auto {
+            width: auto;
+            margin: 0 0 5px 0;
+        }
+        .remove {
+            float: right;
+        }
+        .add-area {
+            display: block;
+            margin-top: 5px;
+            overflow: hidden;
+            width: 295px;
+        }
+    }
+    .false-label, .fields {
+        margin-top: 10px;
+    }
+}
+.frm-require, .frm-help {
+    clear: both;
+    display: block;
+    padding-top: 10px;
+}
+.frm-require input {
+    margin: 0;
+}
+.frm-elements:after, .frm-fld:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.frm-elements, .frm-fld {
+    display:inline-block;
+}
+.frm-elements, .frm-fld {
+    display:block;
+}
+/* @end */

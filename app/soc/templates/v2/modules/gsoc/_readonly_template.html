@@ -1,0 +1,21 @@
+{% for group, fields in model %}
+  <div id="{{ css_prefix }}-{{ group|slugify }}" class="block block-{{css_prefix}}-{{ group|slugify }}">
+    <h4 id="title-section-{{ css_prefix }}-{{ group|slugify }}">{{ group }}</h4>
+    <div id="block-{{ css_prefix }}-{{ group|slugify }}-content" class="block-content model-readonly">
+      {% for name, field in fields %}
+        <div id="{{ css_prefix }}-{{ group|slugify }}-{{ name|slugify }}" class="{% if forloop.counter|divisibleby:2 %}row-even{% else %}row-odd{% endif %}">
+          <label>{{ name }}</label>
+          <span class="readonly-row-content">
+            {% if field %}{{ field }}{% else %}N/A{% endif %}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+
+{% for name, field in hidden_fields.items %}
+<div id="{{ css_prefix }}-{{ name|slugify }}" class="hidden-row">
+  <span id="{{ name|slugify }}">{% if field %}{{ field }}{% endif %}</span>
+</div>
+{% endfor %}

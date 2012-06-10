@@ -1,0 +1,58 @@
+{% extends "v2/modules/gci/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/{{ css_path }}/uniform.default.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/{{ css_path }}/forms.css" />
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+<div class="block block-form">
+  {{ task_edit_form_template.render }}
+</div>
+
+{% endblock page_content %}
+
+{% block synchronous_scripts %}
+  <script type='text/javascript' src="/tiny_mce/tiny_mce.js"></script>
+  {{ block.super }}
+{% endblock synchronous_scripts %}
+{% block dependencies %}
+  [
+    dep.uniform,
+    null,
+    function () {
+      jQuery("select, input:radio, input:file, input:checkbox").uniform();
+
+      /* Add new mentors upon the click of "Add new" link below assign mentors*/
+      var last_id = 1;
+      new_link = function () {
+        var new_mentor = jQuery("select#assign-mentor-0").clone(true);
+        new_mentor = new_mentor.attr(
+            'id', new_mentor.attr('id') + '-new-' + last_id);
+        new_mentor.appendTo("div#select-mentors-wrapper");
+        new_mentor.children('option').each(function () {
+          jQuery(this).removeAttr('selected');
+          jQuery(this).removeAttr('disabled');
+        });
+        new_mentor.uniform();
+        last_id++;
+      }
+      tinyMCE.init(melange.tinyMceConfig(["melange-description-textarea"], "advanced"));
+    }
+  ]
+{% endblock dependencies %}

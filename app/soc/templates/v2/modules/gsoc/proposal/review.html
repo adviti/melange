@@ -1,0 +1,286 @@
+{% extends "v2/modules/gsoc/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/buttons.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/forms.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/uniform.default.css" />
+{% endblock stylesheets %}
+
+{% block usermenu %}
+  {{ user_actions.render }}
+{% endblock usermenu %}
+
+{% block page_content %}
+
+{% if posted %}
+  {% if comment_box.form.errors %}
+    <div id="flash-message" class="flash-error">
+    <p>Sorry, we could not save your comment. Please fix the errors mentioned
+    in the comment form below and submit the form again to save.</p>
+  {% else %}
+    <div id="flash-message" class="flash-success">
+    <p>Data saved successfully.</p>
+  {% endif %}
+  </div>
+{% endif %}
+
+{% if duplicate %}
+  {{ duplicate.render }}
+{% endif %}
+
+<!-- Proposal Ignored banner -->
+{% if proposal_ignored %}
+  <div id="user-message" class="error">
+    <strong>ALERT:</strong> This proposal has been flagged as
+    <strong>ignored</strong> by
+    {% if user_role == 'proposer' %}
+      the organization administrators. You will <strong>NOT</strong> be
+      allowed to update or withdraw the proposal now. If you think this is
+      incorrect, contact your organization administrators to resolve this
+      situation.
+    {% else %}{% if user_role == 'mentor' %}
+      the organization administrators. You will <strong>NOT</strong> be
+      allowed to perform any action on this proposal now. If you think this
+      is incorrect, contact your organization administrators to resolve this
+      situation.
+    {% else %}{% if user_role == 'org_admin' %}
+      you or one of the other administrators of your organization. Neither
+      will the student be able to update or withdraw this proposal nor the
+      mentors of your organization will be able to perform any action on
+      this proposal. If you think this is incorrect, please click the
+      <strong>Unignore</strong> button below to resolve this situation.
+      <strong>NOTE:</strong> You will need to refresh this page after
+      clicking the Unignore button, to perform any further actions on this
+      proposal.
+    {% endif %}{% endif %}{% endif %}
+  </div>
+{% endif %}
+
+<!-- Proposal withdrawn banner -->
+{% if proposal.status == "withdrawn" %}
+  <div id="user-message" class="error">
+    <strong>ALERT:</strong>
+    {% if user_role == 'proposer' %}
+      You have withdrawn this proposal. If you want your organization to
+      consider this proposal, click the <strong>Resubmit</strong> button
+      against the text "Withdraw proposal" below.
+    {% else %}{% if user_role == 'org_admin' or user_role == 'mentor' %}
+      The student has withdrawn this proposal. He/She can resubmit this proposal
+      by clicking the <strong>Resubmit</strong> button that is accessible to 
+      them against the text "Withdraw proposal" on this page.
+    {% endif %}{% endif %}
+  </div>
+{% endif %}
+
+
+<h1 id="project-page-title">
+  {{ proposal.title }}
+</h1>
+<h2 id="project-page-student-name">{{ student_name }}
+{% if update_link and not proposal_ignored %}
+  <div id="edit-page" class="project-edit-link">
+    <a href="{{ update_link }}">Edit proposal</a>
+  </div>
+{% endif %}
+</h2>
+
+<div class="project-short">
+  {% if public_comments_visible %}
+    <p class="project-mentor"><strong>Email:</strong> {{ student_email }}</p>
+  {% endif %}
+  {% if private_comments_visible %}
+  <p class="project-mentor"><strong>Mentor:</strong> {{ mentor.name|default:"No mentor assigned" }}</p>
+  <p class="project-possible-mentor"><strong>Possible mentors: </strong>{{ possible_mentors|default:"None" }}</p>
+  {% endif %}
+  <p class="description"><strong>Short description:</strong> {{ proposal.abstract }}</p>
+  {% if private_comments_visible %}
+  <p class="status"><strong>Status:</strong> {{ proposal.status }}</p>
+  {% endif %}
+  {% if additional_info %}
+  <p class="description"><strong>Additional info:</strong>
+    <a href="{{ additional_info_link }}"> {{ additional_info }}</a>
+  </p>
+  {% endif %}
+</div>
+
+<div class="project-long">
+{{ proposal.content|safe }}
+</div>
+
+{% if scoring_visible %}
+<div class="score">
+  <div class="score-average">
+    <strong>Average score:</strong>
+    <div id="score-average-stars" class="stars"></div>
+    <div id="score-average-desc">
+      <em>{{ scores.average }}/{{ max_score }} out of {{ scores.number }} users, total: {{ scores.total }}</em>
+    </div>
+  </div>
+  <div class="score-add">
+    <strong>My score:</strong>
+    <div id="score-add-stars" class="stars"></div>
+  </div>
+</div>
+{% endif %}
+
+{% if public_comments_visible %}
+<div class="project-comment-container">
+  {% if private_comments_visible %}
+  <div class="project-comment-box project-comment-private-container">
+    <a name="private-comments"></a><h3>{{ private_comments|length }} private comments</h3>
+    {% for comment in private_comments %}
+      <div class="project-comment-single" id="c{{ comment.key.id_or_name }}">
+        <p class="project-comment-meta"><strong>{{ comment.author.name }}</strong> <a href="#c{{ comment.key.id_or_name }}">{{ comment.created }}</a></p>
+        {{ comment.content|safe }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="project-comment-box project-comment-public-container">
+    <a name="comments"></a><h3>{{ public_comments|length }} comments</h3>
+    {% for comment in public_comments %}
+      <div class="project-comment-single" id="c{{ comment.key.id_or_name }}">
+        <p class="project-comment-meta"><strong>{{ comment.author.name }}</strong> <a href="#c{{ comment.key.id_or_name }}">{{ comment.created }}</a></p>
+        {{ comment.content|safe }}
+      </div>
+    {% endfor %}
+  </div>
+  <!-- begin comment form -->
+  <a name="comment"></a>
+  <form action="{{ comment_box.action }}" method="post" id="form" class="form-project-comment">
+  {{ comment_box.form.render }}
+  </form>
+  <!-- end comment form -->
+</div>
+{% endif %}
+{% endblock page_content %}
+
+{% block synchronous_scripts %}
+  <script type='text/javascript' src="/tiny_mce/tiny_mce.js"></script>
+  {{ block.super }}
+{% endblock synchronous_scripts %}
+{% block dependencies %}
+  [
+  dep.uniform,
+  dep.jqueryui.dialog,
+  dep.melange.action,
+  {% if scoring_visible %}
+  dep.raty,
+  {% endif %}
+  function () {
+    /* Apply Uniform CSS to form fields. */
+    /* Only in this case we are customizing the input type checkbox to be
+       only applied for the field with the id is_private since it interferes
+       with the awesome looking action buttons */
+    jQuery("select, input:radio, input:file, input:checkbox#is_private").uniform();
+
+    /* Change all the tooltips to be displayed onhover over a
+      * question mark. Calling this function only once will take
+      * care of all such instances.
+      */
+    melange.action.createCluetip();
+
+    /* Create the project featured button and make it post using ajax. */
+    {% for button in user_actions.toggle_buttons %}
+      melange.action.toggleButton(
+          "{{ button.id }}", "{{ button.type }}", "{{ button.post_url }}",
+          "{{ button.state }}",
+          {checked: "{{ button.labels.checked }}",
+           unchecked: "{{ button.labels.unchecked }}"});
+    {% endfor %}
+
+    {% if public_comments_visible %}
+      tinyMCE.init(melange.tinyMceConfig(["melange-content-textarea"]));
+    {% endif %}
+    {% if scoring_visible %}
+      var initialTotal = {{ scores.total }};
+      var initialNumber = {{ scores.number }};
+      var userInitialScore = {{ scores.user_score }};
+      var maxScore = {{ max_score }};
+
+      var successHandler = function (userScore) {
+        userScore = parseInt(userScore);
+        var newTotal = (initialTotal - userInitialScore + userScore);
+
+        var newNumber = initialNumber;
+        /* the user did not score */
+        if (!userInitialScore && userScore) {
+          newNumber++;
+        }
+        /* the user removed his or her score */
+        if (userInitialScore && !userScore) {
+          newNumber--;
+        }
+
+        var newAverage;
+        var newMessage;
+        if (!newNumber) {
+          newAverage = 0;
+          newMessage = 'No scores yet';
+        } else {
+          newAverage = Math.floor(newTotal / newNumber);
+          newMessage = newAverage + '/' + maxScore + ' out of ' + newNumber + ' users, total: ' + newTotal;
+        }
+        jQuery.fn.raty.start(newAverage, '#score-average-stars');
+        jQuery('#score-average-desc em').html(newMessage);
+      };
+    {% endif %}
+
+    jQuery(document).ready(function() {
+      {% if scoring_visible %}
+        jQuery('#score-average-stars').raty({
+          number: maxScore,
+          readOnly:   true,
+          start:      {{ scores.average }},
+          half:	    true,
+          path:       '/soc/content/' + melange.config.app_version + '/images/v2/gsoc',
+          starHalf:   'proposal-rate-star-half.png',
+          starOff:    'proposal-rate-star-off.png',
+          starOn:     'proposal-rate-star-on.png',
+        });
+      {% endif %}
+    });
+
+    {% if scoring_visible %}
+      hintList = [];
+      for(var i = 0; i < maxScore; i++) {
+        hintList[i] = '' + (i + 1) + ' star(s)';
+      }
+
+      $('#score-add-stars').raty({
+          cancel: true,
+          cancelPlace:'right',
+          cancelOff: 'proposal-rate-cancel-off.png',
+          cancelOn: 'proposal-rate-cancel-on.png',
+          cancelHint: 'Remove my rating',
+          click: function (value) {
+              jQuery.post("{{ score_action }}", {value: value, xsrf_token: window.xsrf_token});
+              successHandler(value)
+          },
+          half:		false,
+          path:       '/soc/content/' + melange.config.app_version + '/images/v2/gsoc',
+          number: maxScore,
+          start:      {{ scores.user_score }},
+          starHalf:   'proposal-rate-star-half.png',
+          starOff:    'proposal-rate-star-off.png',
+          starOn:     'proposal-rate-star-on.png',
+          hintList:   hintList
+      });
+    {% endif %}
+  }
+  ]
+{% endblock dependencies %}

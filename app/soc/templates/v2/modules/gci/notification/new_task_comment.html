@@ -1,0 +1,39 @@
+{% extends "v2/soc/notification/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+{% block content %}
+<p>
+
+{{ commented_by }} has left the following comment at {{ task_title }} 
+<a href={{ task_url }}>{{ task_url }}</a>:
+</p>
+<div id="review">
+<p>
+<b>{{ comment_title|safe }}</b>
+</p>
+<p>
+{{ comment_content|safe }}
+</p>
+</div>
+{% endblock %}
+
+{% block unsubscribe %}
+<div id="unsubscribe">
+  ---
+  <p>
+  You are receiving this message because you are subscribed to {{ task_title }}. <br/>
+  To stop receiving these messages, go to: <a href="{{ task_url }}">{{ task_url }}</a>.
+  </p>
+</div>
+{% endblock unsubscribe %}

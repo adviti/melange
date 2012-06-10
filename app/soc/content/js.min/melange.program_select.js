@@ -1,0 +1,1 @@
+(function(){if(window.melange===undefined)throw new Error("Melange not loaded");var a=window.melange;a.program_select=window.melange.program_select=function(){return new a.program_select};var b=a.logging.debugDecorator(a.program_select);a.error.createErrors([]);b.makeSelector=function(c){jQuery(c).bind("change",function(){document.location.href=this.value})}})();

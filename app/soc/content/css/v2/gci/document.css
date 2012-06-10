@@ -1,0 +1,16 @@
+#document-content a span[style], a:visited span[style] {
+    background-color: #ffffff !important;
+    color: #0f649d !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    text-decoration: none !important;
+    vertical-align: baseline !important;
+    white-space: pre-wrap !important;
+}
+#document-content ul, ol {
+    padding-left: 20px !important;
+}
+
+#document-content ul ul {
+    padding-left: 0px !important;
+}

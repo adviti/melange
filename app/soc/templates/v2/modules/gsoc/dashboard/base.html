@@ -1,0 +1,61 @@
+{% extends "v2/modules/gsoc/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/dashboard.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gsoc/uniform.default.css" />
+{% endblock stylesheets %}
+
+{% block page_content %}
+  {% if alert_msg %}
+    <div id="user-message" class="error">
+      {{ alert_msg|safe }}
+    </div>
+  {% endif %}
+
+  <h1 id="main-page-title">{{ user_name }}'s Dashboard</h1>
+  {{ logged_in_msg.render }}
+
+  {{ program_select.render }}
+
+  {% for dashboard in dashboards %}
+    {{ dashboard.render|safe }}
+  {% endfor %}
+{% endblock page_content %}
+
+{% block dependencies %}
+  [
+    dep.uniform,
+    dep.melange.list,
+    css("/soc/content/{{ app_version }}/css/v2/gsoc/user-messages.css"),
+    dep.hashchange,
+    dep.melange.program_select,
+    null,
+    function() {
+      jQuery("select, input:radio, input:file, input:checkbox").uniform();
+
+      melange.program_select.makeSelector("#program_select");
+    },
+    tc("/soc/content/{{ app_version }}/js/templates/soc/dashboard/dashboard.js", {
+      'dashboard_class': 'dashboard',
+      'dashboard_link_class': 'dashboard-link',
+      'dashboard_id_suffix': '-dashboard',
+      'component_link_class': 'component-link',
+      'list_container_class': 'melange-list-container',
+    })
+  ]
+{% endblock dependencies %}

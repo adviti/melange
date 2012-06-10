@@ -1,0 +1,15 @@
+{% for group, fields in model %}
+  <div id="{{ css_prefix }}-{{ group }}" class="block block-{{css_prefix}}-{{ group }}">
+    <h4 id="title-section-{{ css_prefix }}-{{ group }}">Request #{{ model.counter|add:"1" }}</h4>
+    <div id="block-{{ css_prefix }}-{{ group }}-content" class="block-content model-readonly">
+      {% for name, field in fields %}
+        <div id="{{ css_prefix }}-{{ group }}-{{ name }}" class="{% if forloop.counter|divisibleby:2 %}row-even{% else %}row-odd{% endif %}">
+          <label>{{ name }}</label>
+          <span class="readonly-row-content">
+            {% if field %}{{ field }}{% else %}N/A{% endif %}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}

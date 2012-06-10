@@ -1,0 +1,91 @@
+= WHAT BELONGS IN /app =
+
+/app should contain only the files needed for the actual Google App
+Engine application "image".  Support code that is not part of the application
+image belongs elsewhere, such as in /scripts, for example.
+
+= THIRD PARTY CODE =
+
+Third-party code that is *not* part of the application image (the Google App
+Engine SDK in /thirdparty/google_appengine, for example) belongs in
+/thirdparty (see also /thirdparty/README).
+
+Third-party code that is part of the application image is placed in a package
+subdirectory in /app, such as /app/django, for example.
+
+If the third-party package is a single Python source file, place the code in
+/app/<package>/__init__.py, so that it can simply be imported using,
+for example:
+
+import feedparser
+
+(The /app/feedparser package is a good example of this approach.)
+
+== THIRD PARTY LICENSES ==
+
+Third-party code must also include a license text file, named LICENSE or
+COPYING, in the package subdirectory.  If the third-party package subdirectory
+is maintained automatically with a tool such as svn_load_dirs.pl (which
+removes files, such as license text files, that were added later to the
+"target" directory), place the license text file in the /app directory
+and add the package name as a suffix (LICENSE.django is an example of this
+case).
+
+= CREATING AN OFFICIAL RELEASE =
+
+== TAGGING A RELEASE ==
+
+Steps (currently done by hand, but too be scripted in the future) to make
+a release:
+
+1) Update the "version:" field in the app.yaml.template file. Resulting
+   format of the "version:" field needs to be:
+
+     A-B-YYYYMMDD
+
+   where:
+   * A is a major number (currently '0' until at least GSoC functionality
+     is completely implemented)
+   * B is a (possibly multi-digit) minor number that is increased whenever
+     there is a major increase in functionality (some major GSoC or GCI
+     feature, e.g. student sign-ups and proposals, is implemented)
+   * YYYY is the four digit year of the release date
+   * MM is the (always) two digit month of the release date (zero-padded)
+   * DD is the (always) two digit day of the release date (zero-padded)
+
+2) Commit this file *by itself* in its own commit.
+
+3) Use 'hg tag' to mark release in Mercurial with exactly the same name as
+   the contents of the "version:" field in the app.yaml.template file.
+
+4) Use 'hg push' to record your changes. Then deploy to the live web site.
+
+== PATCHING AND RE-RELEASING AN EXISTING RELEASE ==
+
+To re-release a previously-tagged release after a patch for a push to
+the live web site:
+
+1) Update use "hg update -r tag" to bring your working copy to the tagged
+   version.
+
+1) Increment the "patch suffix" of the "version:" field value to the next
+   integer (for example, "p1" becomes "p2"), or append "p1" to the end of
+   the existing string if this is the first patch release (so the first tagged
+   patch release will always be "p1").  For example:
+
+     A-B-YYYYMMDD becomes A-B-YYYYMMDDp1
+
+   and:
+
+     A-B-YYYYMMDDp1 becomes A-B-YYYYMMDDp2
+
+   etc.
+
+2) Commit this file *by itself* in its own commit (after all patches are
+   committed).
+
+3) Use 'hg tag' to mark modified branch with exactly the same name as the
+   contents of the new, patched "version:" field in the app.yaml.template
+   file.
+
+4) Push changes with 'hg push'. Then deploy.

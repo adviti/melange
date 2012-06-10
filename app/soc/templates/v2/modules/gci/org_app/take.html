@@ -1,0 +1,108 @@
+{% extends "v2/modules/gci/form_base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gci/uniform.default.css" />
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+{% if posted %}
+  <div class="block block-user-message">
+  {% if error %}
+    <p>Sorry, we could not save your data. Please fix the errors mentioned below.</p>
+  {% else %}
+    <p>Data saved successfully.</p>
+  {% endif %}
+  </div>
+{% endif %}
+
+<div class="block block-form">
+  <!-- begin form -->
+  {% block open_form %}
+  <!-- Header before the form indicating which form the user is editing -->
+  <div class="block-form-title">
+    <span class="title">
+    {% if form_header_msg %}
+      {{ form_header_msg }}
+    {% else %}
+      {{ page_name }}
+    {% endif %}
+    </span>
+    <span class="req">* fields required</span>
+  </div>
+
+  <div class="description">
+    {{ description|safe }}
+  </div>
+  <!-- end of pre-form header -->
+
+  {% endblock open_form %}
+
+  <form action="{% if cbox %}?cbox=true{% else %}#{% endif %}" method="post" id="form" class="clearfix">
+    {% for form in forms %}
+      {{ form.render }}
+    {% endfor %}
+
+    {% block form_button %}
+      <div class="form-row form-row-buttons">
+        <input value="Submit" class="button" type="submit">
+      </div>
+    {% endblock form_button %}
+  </form>
+</div>
+<!-- end form -->
+
+{% endblock page_content %}
+
+
+{% block dependencies %}
+  [
+    dep.jqueryui.effects.blind,
+    dep.uniform,
+    null,
+    function () {
+      jQuery("select, input:radio, input:file, input:checkbox").uniform();
+
+      jQuery(document).ready(function () {
+
+        jQuery(':checkbox[value="Other"],:radio').each(function () {
+          if (jQuery(this).val() == "Other") {
+            var selector = "#form_row_" + jQuery(this).attr("name") + "-other";
+            if (jQuery(this).parent().attr("class") == "checked") {
+              jQuery(selector).show();
+            } else {
+              jQuery(selector).hide();
+            }
+          }
+        });
+
+        jQuery(':radio').change(function () {
+          var selector = "#form_row_" + jQuery(this).attr("name") + "-other";
+          if (jQuery(this).val() != "Other") {
+            jQuery(selector).hide("Blind");
+          } else {
+            jQuery(selector).show("Blind");
+          }
+        });
+        jQuery(':checkbox[value="Other"]').change(function () {
+          var selector = "#form_row_" + jQuery(this).attr("name") + "-other";
+          jQuery(selector).toggle("Blind");
+        });
+      });
+    }
+  ]
+{% endblock dependencies %}

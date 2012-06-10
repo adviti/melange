@@ -1,0 +1,44 @@
+<div class="block block-how-it-works clearfix">
+    <span class="block-how-it-works-title">How Google Code-In Works:</span>
+    <div class="block-how-it-works-cycle clearfix">
+        <div class="block-how-it-works-step block-how-it-works-step1">
+            <div class="cog"></div>
+            <div class="arrow"></div>
+            <span>Pick a task from the list</span>
+        </div>
+        <div class="block-how-it-works-step block-how-it-works-step2">
+            <div class="cog"></div>
+            <div class="cog-center"></div>
+            <div class="arrow"></div>
+            <span>Complete the task</span>
+        </div>
+        <div class="block-how-it-works-step block-how-it-works-step3">
+            <div class="cog"></div>
+            <div class="cog-center"></div>
+            <div class="arrow"></div>
+            <span>Your task is approved!</span>
+        </div>
+        <div class="block-how-it-works-step block-how-it-works-repeat">
+            <div class="arrow"></div>
+            <div class="block-how-it-works-repeat-caption">
+                <div class="repeat-icon"></div><span>Repeat! <em>(and earn fabulous prizes)</em></span>
+            </div>
+        </div>
+    </div>
+    <div class="block-how-it-works-more">
+        <div class="block-how-it-works-more-caption">
+            <span>Google Code-In is a program for pre-university students, ages 13-17 years old.
+            {% if about_link %}
+            <a href="{{ about_link }}">Learn more ></a>
+            {% endif %}
+            </span>
+        </div>
+    </div>
+    {% if start_text %}
+    <div class="block-how-it-works-start">
+        <span>Get Started Now!</span>
+        <a href="{{ start_link }}">{{ start_text }}</a>
+    </div>
+    {% endif %}
+</div>
+<!-- end .block.block-how-it-works -->

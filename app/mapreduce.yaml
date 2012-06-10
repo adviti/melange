@@ -1,0 +1,204 @@
+mapreduce:
+- name: ConvertProfile
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreKeyInputReader
+    handler: soc.mapreduce.convert_profile.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.profile.GSoCProfile
+
+- name: ConvertStudentInfo
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_student_info.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.profile.GSoCStudentInfo
+
+- name: ConvertProposal
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreKeyInputReader
+    handler: soc.mapreduce.convert_proposal.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.proposal.GSoCProposal
+
+- name: ConvertProjectMentors
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_project_mentors.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.project.GSoCProject
+
+- name: ConvertProjectSurveySchema
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_survey_schema.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.project_survey.ProjectSurvey
+
+- name: ConvertGradingProjectSurveySchema
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_survey_schema.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.grading_project_survey.GradingProjectSurvey
+
+- name: ConvertProjectSurvey
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_surveys.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.project_survey.ProjectSurvey
+
+- name: ConvertGradingProjectSurvey
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_surveys.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.grading_project_survey.GradingProjectSurvey
+
+- name: ConvertOrgAppSurvey
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_surveys.process
+    params:
+    - name: entity_kind
+      value: soc.models.org_app_survey.OrgAppSurvey
+
+- name: GCIConvertTask
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_task
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+
+- name: GCIConvertTaskTypeTag
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_tag
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.TaskTypeTag
+
+- name: GCIConvertTaskDifficultyTag
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_tag
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.TaskDifficultyTag
+
+- name: GCIConvertTaskArbitraryTag
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_tag
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.TaskArbitraryTag
+
+- name: GCIDeleteKeyNameBasedTasks
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_task_children_delete
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+
+- name: GCIProcessOrgApp
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.process_gci_org_apps.process
+    params:
+    - name: entity_kind
+      value: soc.models.org_app_record.OrgAppRecord
+    - name: program_key
+
+- name: InitGCITaskAuthorship
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.init_gci_task_authorship.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+
+- name: PublishGCITasks
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.publish_gci_tasks.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+    - name: program_key
+
+- name: AutoSubscribeToGCITasks
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.auto_subscribe_to_gci_tasks.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+    - name: program_key
+
+- name: UpdateTaskDifficulties
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_difficulty
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+
+- name: UpdateTaskTypes
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_task_types
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+
+- name: UpdateTaskArbitTags
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.convert_gci_task.process_arbit_tags
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.task.GCITask
+
+- name: AddGCIChangesToComments
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.add_gci_changes_to_comments.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gci.models.comment.GCIComment
+    - name: program_key
+
+- name: MigrateBlobs
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.migrate_blobs.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.profile.GSoCStudentInfo
+
+- name: UnfreezeGSoCProfiles
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.unfreeze_entities.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.profile.GSoCProfile
+
+- name: UnfreezeGSoCOrgs
+  mapper:
+    input_reader: google.appengine.ext.mapreduce.input_readers.DatastoreInputReader
+    handler: soc.mapreduce.unfreeze_entities.process
+    params:
+    - name: entity_kind
+      value: soc.modules.gsoc.models.organization.GSoCOrganization

@@ -1,0 +1,103 @@
+/* @group Normalize.css */
+@import url("normalize.css");
+
+/* @group Typography */
+body, button, input, select, textarea {
+    color: #000;
+    font: 12px/1.5 Arial, "Helvetica Neue", "Liberation Sans", FreeSans, sans-serif;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 23px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+h4 {
+  font-size: 19px;
+}
+
+h5 {
+  font-size: 17px;
+}
+
+h6 {
+  font-size: 15px;
+}
+
+ul, ol {
+    margin: 1em 0;
+    padding: 0 0 0 40px;
+}
+ol {
+  list-style: decimal;
+}
+ul {
+  list-style: disc;
+}
+li {
+  margin-left: 30px;
+}
+
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset,
+figure {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+a, a:visited, .ui-widget-content a { color: #0f649d; text-decoration: none; }
+a:hover {  }
+
+/* @group error */
+
+body.error {
+	background:url(../../images/v2/melange-404.png) top center no-repeat;
+}
+
+#error-not-found {
+	color: #666;
+}
+#error-not-found-content {
+	margin: 275px auto 0 auto;
+	width: 650px;
+}
+#error-not-found-content h1 {
+	font-size:80px;
+	display:inline;
+	float:left;
+	padding-right:20px;
+	margin-top:0px;
+}
+#error-not-found-content p {
+	font-size:20px;
+	padding-top:15px;
+	font-weight:bold;
+	line-height:130%;
+}
+#error-not-found-content a:link,
+#error-not-found-content a:hover,
+#error-not-found-content a:visited,
+#error-not-found-content a:active {
+	color: #0074c1;
+}
+/* @end */

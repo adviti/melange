@@ -1,0 +1,120 @@
+{% extends "v2/modules/gci/base.html" %}
+{% comment %}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" media="screen" href="/soc/content/{{ app_version }}/css/v2/gci/dashboard.css" />
+{% endblock stylesheets %}
+
+{% block usermenu %}
+  {{ user_actions.render }}
+{% endblock usermenu %}
+
+{% block page_content %}
+  {% for dashboard in dashboards %}
+    {{ dashboard.render|safe }}
+  {% endfor %}
+{% endblock %}
+
+{% block dependencies %}
+  [
+    dep.melange.list,
+    dep.hashchange,
+    dep.melange.action,
+    {% if colorbox %}
+    css("/soc/content/{{ app_version }}/css/v2/gsoc/colorbox.css"),
+    dep.colorbox,
+    null,
+    function() {
+      jQuery(function() {
+        var state = '{% if not colorbox %}cbox=true{% endif %}';
+
+        /* add colorbox class into link inside .column-entry
+         * except the link to other dashboard, which has .dashboard-link
+         * class.
+         */
+        jQuery('.column-entry a').not('.dashboard-link')
+          .colorbox({
+            'iframe': true, 'width': '780px', 'height': '450px'
+          })
+          .each(function() {
+            /* injecting cbox query string if not exists */
+            var href = this.href.split(/\?/);
+            var new_q = '?cbox=true';
+            if (href.length > 1) {
+              new_q = href[1] + "&" + state;
+              hashes = href[1].split(/&/);
+              for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split("=");
+                if (hash[0] === "cbox") {
+                  new_q = href[1];
+                  break;
+                }
+              }
+              new_q = "?" + new_q;
+            }
+            this.href = href[0] + new_q;
+          });
+      });
+    },
+    {% endif %}
+    function () {
+      /* Change all the tooltips to be displayed onhover over a
+       * question mark. Calling this function only once will take
+       * care of all such instances.
+       */
+      melange.action.createCluetip();
+
+      var state = '{% if not colorbox %}colorbox=true{% endif %}';
+      /* Create the toggle button to switch to colorbox mode */
+      {% for button in user_actions.toggle_buttons %}
+        melange.action.toggleButton(
+            "{{ button.id }}", "{{ button.type }}", "{{ button.post_url }}",
+            "{{ button.state }}",
+            {checked: "{{ button.labels.checked }}",
+             unchecked: "{{ button.labels.unchecked }}"},
+            function () {
+              var q = document.location.search.substr(1);
+              var redirect = document.location.href;
+              var new_q = "?" + state;
+              var hashes, hash;
+              if (q.length) {
+                new_q = document.location.search + "&" + state;
+                hashes = location.search.substring(1).split(/&/);
+                for (var i = 0; i < hashes.length; i++) {
+                  hash = hashes[i].split("=");
+                  if (hash[0] === "colorbox") {
+                    if (state) {
+                      new_q = document.location.search;
+                    } else {
+                      new_q = "?" + hashes.slice(0, i).concat(hashes.slice(i+1, hashes.length)).join("&");
+                    }
+                    break;
+                  }
+                }
+              }
+              document.location.href = new_q;
+            });
+      {% endfor %}
+    },
+    tc("/soc/content/{{ app_version }}/js/templates/soc/dashboard/dashboard.js", {
+      'dashboard_class': 'dashboard',
+      'dashboard_link_class': 'dashboard-link',
+      'dashboard_id_suffix': '-dashboard',
+      'component_link_class': 'component-link',
+      'list_container_class': 'melange-list-container',
+    })
+  ]
+{% endblock dependencies %}

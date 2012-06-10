@@ -1,0 +1,30 @@
+/* style for cbox iframed */
+body {
+  min-width: 740px;
+}
+ul {
+  list-style: disc;
+  margin-left: 1.1em;
+  list-style: disc;
+}
+ol {
+  margin-left: 1.5em;
+}
+ul ul {
+  margin-left: 1em;
+  font-size: 1em;
+}
+ol ol {
+  margin-left: 1.5em;
+  font-size: 1em;
+}
+ul li, ol li {
+  list-style-position: outside;
+}
+.colorbox-iframe {
+  width: 740px;
+  margin: 39px auto;
+}
+.colorbox-iframe .content {
+  background-color: #fff;
+}

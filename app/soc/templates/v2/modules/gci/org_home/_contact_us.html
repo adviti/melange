@@ -1,0 +1,18 @@
+<div class="block block-connect">
+  <div class="block-title">Contact Us</div>
+  <div class="block-content">
+    <ul class="menu menu-center-inline">
+      {% if organization.email %}
+        <li><a href="mailto:{{ organization.email }}">
+          <img src="/soc/content/{{ app_version }}/images/v2/gci/block-connect-em.gif" height="29" width="29" alt="Email" />
+        </a></li>
+      {% endif %}
+      {% if program.irc %}
+        <li><a href="{{ organization.irc_channel }}">
+          <img src="/soc/content/{{ app_version }}/images/v2/gci/block-connect-irc.gif" height="29" width="29" alt="IRC" />
+        </a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+<!-- end .block.block-connect -->
